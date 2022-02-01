@@ -4,6 +4,11 @@
     src: url(./fonts/Belwe-Bold.woff) format("woff"), url(./fonts/Belwe-Bold.ttf) format("truetype");
 }
 
+@font-face {
+    font-family: 'Franklin Gothic';
+    src: url(./fonts/Franklin-Gothic.eot);
+    src: url(./fonts/Franklin-Gothic.woff) format("woff"), url(./fonts/Franklin-Gothic.ttf) format("truetype");
+}
 
 
 html, body {
