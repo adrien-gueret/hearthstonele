@@ -47,6 +47,13 @@ body {
     font-style: italic;
     margin-left: 12px;
     margin-top: 12px;
+    display: none;
+}
+
+@media (min-width: 650px) {
+    #header h2 {
+        display: block;
+    }
 }
 
 #guessForm {
@@ -78,7 +85,7 @@ body {
 
 #rules {
     display: none;
-    padding: 32px 64px;
+    padding: 8px 16px;
 }
 
 #rules p {
@@ -87,8 +94,18 @@ body {
 
 .rulesTeaser {
     text-align: center;
-    padding: 64px;
+    padding: 16px;
     padding-bottom: 0;
+}
+
+@media (min-width: 650px) {
+    #rules {
+        padding: 32px 64px;
+    }
+
+    .rulesTeaser {
+        padding: 64px;
+    }
 }
 
 .rulesButtonContainer {
