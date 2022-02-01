@@ -263,6 +263,15 @@ blockquote {
     width: 260px;
     left: calc(50vw - 130px);
     bottom: 32px;
+    transform-origin: bottom left;
+    z-index: 100;
+    transform: scale(.8);
+}
+
+@media (min-width: 800px) {
+    #player {
+        transform: scale(1);
+    }    
 }
 
 #damage {
