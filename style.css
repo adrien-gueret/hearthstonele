@@ -22,7 +22,6 @@ body {
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
     animation: fadeIn 1000ms ease-in 1;
     font-size: 16px;
-    min-width: 650px;
 }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; }  }
