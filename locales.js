@@ -9,7 +9,7 @@
     var locales = {
         fr_FR: {
             submitButton: 'Soumettre',
-            guessSubtitle: 'Devinez un maximum de cartes HearthStone !',
+            guessSubtitle: 'Devinez un maximum de cartes HearthStone&nbsp;!',
             rules1: 'Vous avez 30 points de vie. Utilisez-les pour trouver des cartes HearthStone à partir de leur texte d\'ambiance.<br />Chaque erreur vous inflige 1 point de dégât, mais chaque bonne réponse vous soigne de 3.',
             rules2: 'Pour chaque erreur, vous récupérez des indications sur les statistiques de la carte à rechercher :',
             rules3: 'Vous pouvez aussi payer des points de vie pour récupérer des indices supplémentaires sur la classe, la rareté etc.',
