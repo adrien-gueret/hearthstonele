@@ -241,7 +241,7 @@
             'heroPowerChoice1_Description', 'heroPowerChoice2_Description', 'heroPowerChoice3_Description', 'heroPowerChoice4_Description', 'heroPowerChoice5_Description',
             'changeCardTitle', 'newCardButtonChange', 'gameEndTitle', 'gameEndButton',
             'configNewGameButton', 'newGameWarning', 'formConfigLanguage', 'formConfigGameMode',
-            'formConfigWildMode', 'formConfigStandardMode', 'configBackButton',
+            'formConfigWildMode', 'formConfigStandardMode', 'configBackButton', 'gameBy',
         ].forEach(function (elementId) {
             var element = document.getElementById(elementId);
             element.innerHTML = translate(elementId);
