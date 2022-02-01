@@ -468,11 +468,13 @@
     function showRules() {
         hideUIElements();
         document.getElementById('rules').style.display = 'block';
+        window.scrollTo(0, 0);
     }
 
     function goToGame() {
         hideUIElements();
         document.getElementById('game').style.display = 'block';
+        window.scrollTo(0, 0);
     }
 
     function showConfig(idToElementToShow, defaultGameMode) {

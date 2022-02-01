@@ -115,8 +115,6 @@ body {
 
 .button {
     background-image: linear-gradient(90deg,#921b9a,#b921c4,#921b9a);
-    font-size: 2rem;
-    padding: 8px 16px;
     border-radius: 10px;
     color: white;
     text-transform: uppercase;
@@ -124,6 +122,15 @@ body {
     transition: background-image 100ms ease-in;
     border: 3px solid #555;
     cursor: pointer;
+    padding: 8px;
+    font-size: 1.5rem;
+}
+
+@media (min-width: 650px) {
+    .button {
+        padding: 8px 16px;
+        font-size: 2rem;
+    }
 }
 
 .button.secondary {
@@ -159,11 +166,18 @@ body {
     background-repeat: no-repeat;
     background-size: contain;
     position: fixed;
-    left: 16px;
+    left: 0;
     bottom: 8px;
     text-align: center;
     font-size: 2.5rem;
     cursor: default;
+    z-index: 100;
+}
+
+@media (min-width: 650px) {
+    .score {
+        left: 16px;
+    }
 }
 
 .score .plus {
@@ -227,6 +241,7 @@ body {
     background-color: transparent;
     border: 0;
     outline: 0;
+    z-index: 100;
 
     width: 64px;
     height: 64px;
@@ -234,7 +249,7 @@ body {
 
     position: fixed;
     bottom: 80px;
-    right: 8px;
+    right: 16px;
 
     background-image: url(./images/footer_nav.png);
     background-repeat: no-repeat;
@@ -247,20 +262,34 @@ body {
 }
 
 #whichFlavorText {
-    padding: 0 32px;
-    margin-bottom: 0;
-    font-size: 2rem;
+    padding: 8px 16px;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+@media (min-width: 650px) {
+    #whichFlavorText {
+        padding: 16px 32px;
+        font-size: 2rem;
+    }
 }
 
 blockquote {
-    font-size: 1.5rem;
     border-left: 6px solid currentColor;
-    padding: 16px;
     background-image: linear-gradient(90deg, #f3f3f3, rgba(255,255,255,.2));
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    margin: 32px auto 24px;
     max-width: 75vw;
+    font-size: 1.5rem;
+    padding: 8px;
+    margin: 16px auto 12px;
+}
+
+@media (min-width: 650px) {
+    blockquote {
+        padding: 16px;
+        margin: 32px auto 24px;
+    }
 }
 
 .stickyForm {
@@ -277,16 +306,18 @@ blockquote {
     margin: 0;
     margin-top: auto;
     width: 260px;
-    left: calc(50vw - 130px);
-    bottom: 32px;
+    left: 8px;
+    bottom: 8px;
     transform-origin: bottom left;
     z-index: 100;
-    transform: scale(.8);
+    transform: scale(.7);
 }
 
 @media (min-width: 800px) {
     #player {
         transform: scale(1);
+        left: calc(50vw - 130px);
+        bottom: 32px;
     }    
 }
 
@@ -480,17 +511,18 @@ blockquote {
     border: 0;
 }
 
-.tableCardName {
-    width: 450px;
-    height: 64px;
-    line-height: 64px;
-    background-size: contain;
+td.tableCardName {
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position: right;
-    font-size: 2rem;
+    background-position: right bottom;
     background-color: #000;
     padding: 0;
     position: relative;
+    height: 64px;
+    width: 100px;
+    font-size: 1rem;
+    line-height: 26px;
+    cursor: default;
 }
 
 .tableCardName img {
@@ -500,20 +532,45 @@ blockquote {
     top: calc(50vh - 250px);
     left: 250px;
     pointer-events: none;
-}
-
-.tableCardName:hover img {
-    display: inline;
+    z-index: 150;
 }
 
 .nameContainer {
     padding: 0 8px;
     height: 100%;
-    width: 100%;
+    width: calc(100% - 16px);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    background-image: linear-gradient(90deg, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 70%);
+    background-image: linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,0) 50%);
+}
+
+#changeCardImage img, #roundSuccessImage img {
+    width: 200px;
+}
+
+@media (min-width: 650px) {
+    td.tableCardName {
+        background-size: contain;
+        width: 450px;
+        font-size: 2rem;
+        cursor: help;
+        line-height: 64px;
+        background-position: right center;
+    }
+
+    .tableCardName:hover img {
+        display: inline;
+    }
+
+    .nameContainer {
+        background-image: linear-gradient(90deg, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 70%);
+    }
+
+    
+    #changeCardImage img, #roundSuccessImage img {
+        width: auto;
+    }
 }
 
 .tableCardStat {
@@ -655,13 +712,17 @@ blockquote {
     color: #f3f3f3;
     text-align: center;
 
-    transform: translateY(100vh);
-    animation: slideUp 1s;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-
     max-width: 70%;
     max-height: 80%;
+}
+
+@media (min-width: 650px) {
+    .modal {
+        transform: translateY(100vh);
+        animation: slideUp 1s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+    }
 }
 
 #errorModal .modal {
