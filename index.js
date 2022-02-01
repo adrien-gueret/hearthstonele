@@ -46,14 +46,16 @@
         heroPower.className = '';
     }
 
-    function closeHeroPowerModal(hasUsedAllClues) {
+    function closeHeroPowerModal(hasUsedAllClues, usedClue) {
         heroPowerModal.style.display = 'none';
         
         if (!hasUsedAllClues) {
             resetHeroPower();
         }
         
-        searchInput.focus();
+        if (usedClue !== 'CHANGE') {
+            searchInput.focus();
+        }
     }
 
     function useClue(clue, client) {
@@ -65,7 +67,7 @@
         } catch (e) {
             return;
         } finally {
-            closeHeroPowerModal(hasUsedAllClues);
+            closeHeroPowerModal(hasUsedAllClues, clue);
         }
 
         switch (clue) {
