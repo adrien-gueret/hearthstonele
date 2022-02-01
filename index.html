@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr_FR">
+    <head>
+        <title>HearthStonele</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link href="./images/favicon.png" rel="icon shortcut" />
+        <link href="style.css" rel="stylesheet" />
+    </head>
+    <body>
+        <header id="header">
+            <h1>HearthStonele</h1>
+            <h2 id="guessSubtitle">Devinez un maximum de cartes HearthStone !</h2>
+        </header>
+
+        <section id="rules">
+            <p id="rules1">
+                Vous avez 30 points de vie. Utilisez-les pour trouver des cartes HearthStone à partir de leur texte d'ambiance.<br />
+                Chaque erreur vous inflige 1 point de dégât,
+                mais chaque bonne réponse vous soigne de 3 points de vie.
+            </p>
+            
+            <p id="rules2">
+                Pour chaque erreur, vous récupérez des indications sur les statistiques de la carte à rechercher :
+            </p>
+
+            <figure>
+                <table class="tableHistory">
+                    <thead>
+                        <tr>
+                            
+                            <th class="tableCardStat cost"></th>
+                            <th class="tableCardStat all_attacks"></th>
+                            <th class="tableCardStat all_healths"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="sampleStatsCost" class="tableCardStat cost hearthstoneText ok">6</td>
+                            <td id="sampleStatsAttack" class="tableCardStat attack hearthstoneText almost">4</td>
+                            <td id="sampleStatsHealth" class="tableCardStat health hearthstoneText ko">9</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <figcaption id="statsExplanation">
+                    Ici, nous apprenons que la carte à rechercher a un coût en mana de 6, qu'il n'y a pas de 9 dans ses stats et que le 4 est présent mais mal placé.
+                    On peut donc déduire que la vie (si c'est un serviteur), l'armure (si c'est un héro) ou la durabiltié (si c'est une arme) de la carte à trouver est de 4. Peut-être <a href="https://playhearthstone.com/fr-fr/cards/59555-forest-warden-omu" target="_blank">Gardienne de la forêt Omu</a> ?
+                </figcaption>
+            </figure>
+
+            <p id="rules3">
+                Vous pouvez aussi payer des points de vie pour récupérer des indices supplémentaires sur la classe, la rareté etc.
+            </p>
+
+            <p class="rulesTeaser">
+                <strong id="howManyCanYouGuess">Combien de cartes HearthStone pouvez-vous deviner avant de perdre tous vos points de vie&nbsp;?</strong>
+            </p>
+
+            <p class="rulesButtonContainer">
+                <button class="button" id="rulesButton">Jouer !</button>
+            </p>            
+        </section>
+
+        <section id="game">
+            <svg width="0" height="0">
+                <path id="hearthstoneCardTitleCurve" d="M0,50 C60,30 180,30 240,50" fill="transparent"></path>
+            </svg>
+
+            <p id="whichFlavorText">Quelle carte a le texte d'ambiance suivant ?</p>
+
+            <div class="stickyForm">
+                <blockquote id="flavorText"></blockquote>
+                <div id="allClues"></div>
+                <form id="guessForm">
+                    <input disabled class="search" type="text" id="searchInput" list="suggestions" autocomplete="off" />
+                    <datalist id="suggestions"></datalist>
+        
+                    <button disabled class="button" id="submitButton">Soumettre</button>
+                </form>
+            </div>
+            
+            <div id="tableHistoryContainer">
+                <table id="tableHistory" class="tableHistory">
+                    <thead>
+                        <tr>
+                            <th class="empty"></th>
+                            <th class="tableCardStat cost"></th>
+                            <th class="tableCardStat all_attacks"></th>
+                            <th class="tableCardStat all_healths"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            
+            <figure id="player">
+                <div id="damage"><span id="damageValue" class="hearthstoneText"></span></div>
+                <img src="images/bob.png" alt="" />
+                <div id="playerHealthContainer">
+                    <span id="playerHealth" class="hearthstoneText">30</span>
+                </div>
+                <button id="heroPower" aria-label="Chercher un indice" title="Chercher un indice"></button>
+                <div id="heroPowerDetails">
+                    <h3 id="heroPowerDetailsTitle" class="hearthstoneText hearthstoneTitle">Chercher un indice</h3>
+                    <p id="heroPowerDetailsDescription" class="hearthstoneDescription"><b>Découvre</b> un indice<br />sur la carte à trouver.</p>
+                </div>
+            </figure>
+
+            <div id="scoreAnimation">
+                <div class="score hearthstoneText">
+                    <span class="plus">+</span>1
+                </div>
+            </div>
+
+            <footer>
+                <aside id="score" class="hearthstoneText score" aria-label="Score" title="Score"></aside>
+                <nav>
+                    <input type="button" class="navButton rules" id="goToRulesButton" aria-label="Règles" title="Règles" />
+                    <input type="button" class="navButton config" id="goToConfigButton" aria-label="Options" title="Options" />
+                </nav>    
+            </footer>
+            
+            <div id="roundSuccess" class="modalOverlay">
+                <div class="modal">
+                    <h2 id="roundSuccessTitle">Bien joué !</h2>
+                    <p id="roundSuccessImage" class="modalInner"></p>
+                    <p id="hasBeenRestored">Vous avez été soigné de 3 points de vie.</p>
+                    <button class="button" id="newCardButtonSuccess">Nouvelle carte</button>
+                </div>
+            </div>
+
+            <div id="changeCard" class="modalOverlay">
+                <div class="modal">
+                    <h2 id="changeCardTitle">La carte recherchée était :</h2>
+                    <p id="changeCardImage" class="modalInner"></p>
+                    <button class="button" id="newCardButtonChange">Nouvelle carte</button>
+                </div>
+            </div>
+
+            <div id="gameEnd" class="modalOverlay">
+                <div class="modal">
+                    <h2 id="gameEndTitle">Partie terminée !</h2>
+                    <p id="gameEndScore"></p>
+                    <p id="gameEndCards" class="modalInner"></p>
+                    <button class="button" id="gameEndButton">Nouvelle partie</button>
+                </div>
+            </div>
+
+            <div id="heroPowerModal" class="modalOverlay">
+                <div class="heroPowerModal">
+                    <div class="heroPowerModalInner">
+                        <button class="heroPowerChoice" id="heroPowerRarity">
+                            <span class="heroPowerCost hearthstoneText">1</span>
+                            <h3 class="hearthstoneText hearthstoneTitle">
+                                <svg viewBox="-30 0 300 50" height="50">
+                                    <text fill="#fff">
+                                        <textPath id="heroPowerChoice1_Title" xlink:href="#hearthstoneCardTitleCurve" textLength="240">
+                                            Estimer la valeur
+                                        </textPath>
+                                    </text>
+                                </svg>
+                            </h3>
+                            <p id="heroPowerChoice1_Description" class="hearthstoneDescription"><br />Dévoile la rareté de la carte recherchée.<br /><br /></p>
+                        </button>
+
+                        <button class="heroPowerChoice" id="heroPowerClass">
+                            <span class="heroPowerCost hearthstoneText">1</span>
+                            <h3 class="hearthstoneText hearthstoneTitle">
+                                <svg viewBox="-30 0 300 50" height="50">
+                                    <text fill="#fff">
+                                        <textPath id="heroPowerChoice2_Title" xlink:href="#hearthstoneCardTitleCurve" textLength="240">
+                                            Étudier le spécimen
+                                        </textPath>
+                                    </text>
+                                </svg>
+                            </h3>
+                            <p id="heroPowerChoice2_Description" class="hearthstoneDescription"><br />Dévoile la classe de la carte recherchée.<br /><br /></p>
+                        </button>
+
+                        <button class="heroPowerChoice" id="heroPowerExpansion">
+                            <span class="heroPowerCost hearthstoneText">2</span>
+                            <h3 class="hearthstoneText hearthstoneTitle">
+                                <svg viewBox="-30 0 300 50" height="50">
+                                    <text fill="#fff">
+                                        <textPath id="heroPowerChoice3_Title" xlink:href="#hearthstoneCardTitleCurve" textLength="240">
+                                            Trianguler la zone
+                                        </textPath>
+                                    </text>
+                                </svg>
+                            </h3>
+                            <p id="heroPowerChoice3_Description" class="hearthstoneDescription"><br />Dévoile l'extension de la carte recherchée.<br /></p>
+                        </button>
+
+                        <button class="heroPowerChoice" id="heroPowerInitials" style="display: none;">
+                            <span class="heroPowerCost hearthstoneText">3</span>
+                            <h3 class="hearthstoneText hearthstoneTitle">
+                                <svg viewBox="-30 0 300 50"  height="50">
+                                    <text fill="#fff">
+                                        <textPath id="heroPowerChoice4_Title" xlink:href="#hearthstoneCardTitleCurve" textLength="240">
+                                            À la bibliothèque !
+                                        </textPath>
+                                    </text>
+                                </svg>
+                            </h3>
+                            <p id="heroPowerChoice4_Description" class="hearthstoneDescription"><br />Dévoile les initiales du nom de la carte recherchée.</p>
+                        </button>
+
+                        <button class="heroPowerChoice" id="heroPowerChange" style="display: none;">
+                            <span class="heroPowerCost hearthstoneText">3</span>
+                            <h3 class="hearthstoneText hearthstoneTitle">
+                                <svg viewBox="-30 0 300 50"  height="50">
+                                    <text fill="#fff">
+                                        <textPath id="heroPowerChoice5_Title" xlink:href="#hearthstoneCardTitleCurve" textLength="240">
+                                            Plan de secours
+                                        </textPath>
+                                    </text>
+                                </svg>
+                            </h3>
+                            <p id="heroPowerChoice5_Description" class="hearthstoneDescription"><br />C'est fichu ! Change la carte à rechercher.<br /></p>
+                        </button>
+                    </div>
+                    
+                    <button class="button" id="cancelHeroPowerButton">Annuler</button>
+                </div>
+            </div>
+        </section>
+
+        <div id="errorModal" class="modalOverlay">
+            <div class="modal">
+                <img src="./images/alert.png" alt="" />
+                <h2 id="errorModalTitle"></h2>
+                <p id="errorModalContainer" class="modalInner"></p>
+                <button class="button" id="errorModalButton">Fermer</button>
+            </div>
+        </div>
+
+        <div id="configModal" class="modalOverlay">
+            <div class="modal">
+                <form id="configForm">
+                    <fieldset>
+                        <legend>
+                            <img src="images/icon_language.svg" alt="" />
+                            <span id="formConfigLanguage">Langue</span>
+                        </legend>
+
+                        <input type="radio" value="en_US" id="languageEN" name="language">
+                        <label for="languageEN">English</label>
+                        
+                        <br/>
+
+                        <input type="radio" value="fr_FR" id="languageFR" name="language">
+                        <label for="languageFR">Français</label>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>
+                            <img src="images/icon_game_mode.svg" alt="" />
+                            <span id="formConfigGameMode">Mode de jeu</span>
+                        </legend>
+
+                        <input type="radio" value="standard" id="modeStandard" name="gameMode" checked>
+                        <label for="modeStandard" id="formConfigStandardMode">Standard</label>
+
+                        <br/>
+
+                        <input type="radio" value="wild" id="modeWild" name="gameMode">
+                        <label for="modeWild" id="formConfigWildMode">Libre</label>
+                    </fieldset>
+
+                    <button type="button" class="button secondary" id="configBackButton">
+                        Annuler
+                    </button>
+                    <button class="button" id="configNewGameButton">Nouvelle partie</button>
+                    <aside id="newGameWarningContainer" class="warning"><img src="./images/alert.png" alt="" /><span id="newGameWarning">Votre partie actuelle sera perdue !</span></aside>
+                </form>
+            </div>
+        </div>
+
+        <script src="locales.js"></script>
+        <script src="client.js"></script>
+        <script src="game.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>

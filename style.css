@@ -1,0 +1,926 @@
+@font-face {
+    font-family: 'Belwe Bold';
+    src: url(./fonts/Belwe-Bold.eot);
+    src: url(./fonts/Belwe-Bold.woff) format("woff"), url(./fonts/Belwe-Bold.ttf) format("truetype");
+}
+
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #ebd6ab;
+    background-image: url(./images/background.jpg);
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    animation: fadeIn 1000ms ease-in 1;
+    font-size: 16px;
+    min-width: 650px;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; }  }
+
+#header {
+    background-color: #554131;
+    background-image: url(./images/header.png);
+    background-repeat: repeat-x;
+    height: 72px;
+    color: #f3f3f3;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+}
+
+#header > * {
+    margin: 0;
+    padding: 0;
+}
+
+#header h2 {
+    font-size: 1rem;
+    font-style: italic;
+    margin-left: 12px;
+    margin-top: 12px;
+}
+
+#game {
+    display: none;
+}
+
+#guessForm {
+    margin-bottom: 32px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#searchInput {
+    padding: 8px 16px;
+    font-size: 2rem;
+    border-radius: 20px;
+    border: 3px solid #b49b76;
+    outline: 0;
+    background-color: #fff;
+    flex-grow: .3;
+    margin-right: 16px;
+}
+
+#searchInput:hover {
+    background-color: #f1f1f1;
+}
+
+#searchInput:focus-visible {
+    border-color: #7687b4;
+    background-color: #f3f3f3;
+}
+
+#rules {
+    display: none;
+    padding: 32px 64px;
+}
+
+#rules p {
+    font-size: 1.5rem;
+}
+
+.rulesTeaser {
+    text-align: center;
+    padding: 64px;
+    padding-bottom: 0;
+}
+
+.rulesButtonContainer {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.button {
+    background-image: linear-gradient(90deg,#921b9a,#b921c4,#921b9a);
+    font-size: 2rem;
+    padding: 8px 16px;
+    border-radius: 10px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-image 100ms ease-in;
+    border: 3px solid #555;
+    cursor: pointer;
+}
+
+.button.secondary {
+    margin-right: 16px;
+    filter: grayscale(1);
+}
+
+.button:hover {
+    background-image: linear-gradient(90deg,#c24bca,#d13cdb,#9829a0);
+}
+
+.button:focus {
+    background-image: linear-gradient(75deg,#cc50d5,#de40e9,#a730af);
+}
+
+[disabled] {
+    pointer-events: none;
+    opacity: .1;
+}
+
+#game {
+    flex-direction: column;
+    min-height: calc(100vh - 140px);
+}
+
+.score {
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    background-image: url(./images/score.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: fixed;
+    left: 16px;
+    bottom: 8px;
+    text-align: center;
+    font-size: 2.5rem;
+    cursor: default;
+}
+
+.score .plus {
+    position: relative;
+    top: 5px;
+    left: 2px;
+}
+
+#scoreAnimation {
+    position: fixed;
+    display: none;
+    z-index: 200;
+    transform: translateY(-50vh);
+    font-size: 3rem;
+    animation: yAxis 750ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+    left: 16px;
+    bottom: 8px;
+}
+
+#scoreAnimation .score {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+
+    transform: translateX(50vw) scale(1.5);
+
+    animation: xAxis 750ms;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+    animation-delay: 1s;
+}
+  
+@keyframes yAxis { 
+    0% {
+        transform: translateY(-50vh);
+        filter: none;
+    }   
+
+    100% {
+        transform: translateY(28px);
+        filter: none;
+    }
+}
+
+@keyframes xAxis {
+    0% {
+        transform: translateX(50vw) scale(1.5) ;
+    }
+
+    100% {
+        transform: translateX(-36px) scale(0.6);
+    }
+}
+
+.navButton {
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+
+    width: 64px;
+    height: 64px;
+    cursor: pointer;
+
+    position: fixed;
+    bottom: 80px;
+    right: 8px;
+
+    background-image: url(./images/footer_nav.png);
+    background-repeat: no-repeat;
+    background-position: left;
+}
+
+.navButton.config {
+    background-position: right;
+    bottom: 8px;
+}
+
+#whichFlavorText {
+    padding: 0 32px;
+    margin-bottom: 0;
+    font-size: 2rem;
+}
+
+blockquote {
+    font-size: 1.5rem;
+    border-left: 6px solid currentColor;
+    padding: 16px;
+    background-image: linear-gradient(90deg, #f3f3f3, rgba(255,255,255,.2));
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin: 32px auto 24px;
+    max-width: 75vw;
+}
+
+.stickyForm {
+    position: sticky;
+    top: 0;
+    background-color: #ebd6ab;
+    background-image: url(./images/background.jpg);
+    z-index: 50;
+}
+
+#player {
+    position: relative;
+    margin: 0;
+    margin-top: auto;
+    width: 260px;
+    left: calc(50vw - 130px);
+}
+
+#damage {
+    display: none;
+    width: 155px;
+    height: 173px;
+    position: absolute;
+    background-image: url(./images/damage.png);
+    font-size: 3.5rem;
+    left: 45px;
+    top: 70px;
+    opacity: 1;
+    transform: scale(0);
+    animation: bounce 2s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes bounce {
+    10% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+    20% {
+        opacity: 1;
+        transform: scale(0.8);
+    }
+    
+    30% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    
+    40% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    80% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+#damageValue {
+    position: absolute;
+    left: 70px;
+    font-weight: bold;
+    top: 52px;
+    transform: rotate(347deg);
+}
+
+#playerHealthContainer {
+    position: absolute;
+    right: -15px;
+    bottom: 0;
+    background-repeat: no-repeat;
+    background-image: url(./images/health_big.png);
+    height: 100px;
+    width: 80px;
+    background-size: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 3.5rem;
+}
+
+#playerHealth {
+    position: relative;
+    top: 6px;
+    right: 5px;
+    cursor: default;
+}
+
+#playerHealth.hurt {
+    color: red;
+}
+
+.hearthstoneText {
+    color: white;
+    text-shadow: #000 4px 0 0, #000 3.25px 2px 0, #000 2px 3px 0, #000 0.3px 2px 0, #000 -1.5px 3.6px 0, #000 -3.2px 2.2px 0, #000 -4px 0.6px 0, #000 -3.6px -1.4px 0, #000 -2.6px -3px 0, #000 -0.8px -4px 0, #000 1.2px -4px 0, #000 2.8px -2.8px 0, #000 4px -1.1px 0;
+    font-family: Belwe Bold;
+    font-weight: 400;
+}
+
+#heroPower {
+    width: 144px;
+    height: 172px;
+    border: 0;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-image: url(./images/heropower.png);
+    background-position: left;
+    cursor: pointer;
+    outline: 0;
+    position: absolute;
+    top: 18px;
+    right: -145px;
+}
+
+#heroPower.used {
+    pointer-events: none;
+    background-position: right;
+}
+
+#heroPower:not(.used):hover, #heroPower:not(.used):focus,
+.heroPowerChoice:hover, .heroPowerChoice:focus,
+#scoreAnimation,
+.navButton:hover, .navButton:focus
+{
+    filter: drop-shadow(0px 0px 5px #fff) drop-shadow(0px 0px 5px #fff) drop-shadow(0px 0px 5px #fff) drop-shadow(0px 0px 5px #fff);
+}
+
+#heroPowerDetails {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 329px;
+    height: 518px;
+    background-image: url('./images/hero-power-details.png');
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 210px;
+    right: -235px;
+    z-index: 100;
+    pointer-events: none;
+    transform: scale(.75);
+}
+
+.hearthstoneTitle {
+    margin-bottom: 34px;
+    font-size: 1.5rem;
+}
+
+.hearthstoneDescription {
+    font-family: 'Franklin Gothic';
+    width: 205px;
+    margin-bottom: 75px;
+    font-size: 1.5rem;
+    line-height: 1em;
+    text-align: center;
+}
+
+#heroPower:not(.used):hover + #heroPowerDetails, #heroPower:not(.used):focus + #heroPowerDetails {
+    display: flex;
+}
+
+#tableHistoryContainer {
+    overflow: auto;
+    margin-bottom: 32px;
+    display: none;
+}
+
+.tableHistory {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+.tableHistory td, .tableHistory th {
+    border: 3px solid #554131;
+}
+
+.tableHistory td {
+    cursor: help;
+}
+
+.tableHistory th.tableCardStat {
+    height: 40px;
+}
+
+.tableHistory th.tableCardStat.cost {
+    background-size: 40%;
+}
+
+.tableHistory .empty {
+    pointer-events: none;
+    border: 0;
+}
+
+.tableCardName {
+    width: 450px;
+    height: 64px;
+    line-height: 64px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+    font-size: 2rem;
+    background-color: #000;
+    padding: 0;
+    position: relative;
+}
+
+.tableCardName img {
+    position: fixed;
+    display: none;
+    z-index: 100;
+    top: calc(50vh - 250px);
+    left: 250px;
+    pointer-events: none;
+}
+
+.tableCardName:hover img {
+    display: inline;
+}
+
+.nameContainer {
+    padding: 0 8px;
+    height: 100%;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-image: linear-gradient(90deg, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 70%);
+}
+
+.tableCardStat {
+    width: 68px;
+    height: 68px;
+    text-align: center;
+    background-size: 80%, cover, cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 2rem;
+    background-color: #fff;
+}
+
+.tableCardStat.cost {
+    background-image: url(./images/mana.png);
+}
+
+.tableCardStat.cost.almost {
+    background-image: url(./images/mana.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px);
+}
+
+.tableCardStat.cost.ko {
+    background-image: url(./images/mana.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px);
+}
+
+.tableCardStat.attack {
+    background-image: url(./images/attack.png);
+    background-position: 5px, center, center;
+}
+
+.tableCardStat.attack.almost {
+    background-image: url(./images/attack.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px);
+}
+
+.tableCardStat.attack.ko {
+    background-image: url(./images/attack.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px);
+}
+
+.tableCardStat.attack_weapon {
+    background-image: url(./images/attack_weapon.png);
+}
+
+.tableCardStat.attack_weapon.almost {
+    background-image: url(./images/attack_weapon.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px);
+}
+
+.tableCardStat.attack_weapon.ko {
+    background-image: url(./images/attack_weapon.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px);
+}
+
+.tableCardStat.all_attacks {
+    background-image: url(./images/stats_attack.png);
+}
+
+.tableCardStat.health {
+    background-image: url(./images/health.png);
+    background-position: 9px, center, center;
+}
+
+.tableCardStat.health.almost {
+    background-image: url(./images/health.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px);
+}
+
+.tableCardStat.health.ko {
+    background-image: url(./images/health.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px);
+}
+
+.tableCardStat.armor {
+    background-image: url(./images/armor.png);
+}
+
+.tableCardStat.armor.almost {
+    background-image: url(./images/armor.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px);
+}
+
+.tableCardStat.armor.ko {
+    background-image: url(./images/armor.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px);
+}
+
+.tableCardStat.durability {
+    background-image: url(./images/durability.png);
+}
+
+.tableCardStat.durability.almost {
+    background-image: url(./images/durability.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px);
+}
+
+.tableCardStat.durability.ko {
+    background-image: url(./images/durability.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px);
+}
+
+.tableCardStat.none.almost {
+    background-image: none, repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px);
+}
+
+.tableCardStat.none.ko {
+    background-image: none, repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px);
+}
+
+.tableCardStat.all_healths {
+    background-image: url(./images/stats_health.png);
+}
+
+.tableCardStat.ok {
+    background-color: chartreuse;
+}
+
+.tableCardStat.ko {
+    background-color: red;
+}
+
+.tableCardStat.almost {
+    background-color: gold;
+}
+
+.modalOverlay {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 500;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 64px;
+    
+    border-style: solid;
+    border-image: url(./images/modale.png);
+    border-image-width: 25;
+    border-image-slice: 25 fill;
+    color: #f3f3f3;
+    text-align: center;
+
+    transform: translateY(100vh);
+    animation: slideUp 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+
+    max-width: 70%;
+    max-height: 80%;
+}
+
+#errorModal .modal {
+    padding-top: 40px;
+}
+
+.modalInner {
+    overflow: auto;
+    margin: 8px 0 32px;
+}
+
+@keyframes slideUp {
+    25% {
+        transform: translateY(100vh);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    75% {
+        transform: translateY(10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+.modal h2 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.modal .button {
+    font-size: 1.5rem;
+}
+
+#heroPowerModal {
+    display: none;
+}
+
+.heroPowerModal {
+    padding: 0;
+    text-align: center;
+}
+
+.heroPowerModalInner {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin-left: -160px;
+}
+
+.heroPowerChoice {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 370px;
+    height: 543px;
+    background-image: url('./images/hero_power_choices.png');
+    background-repeat: no-repeat;
+    transform: scale(.75);
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    outline: 0;
+    flex-shrink: 0;
+    margin-right: -64px;
+    position: relative;
+}
+
+.heroPowerChoice .hearthstoneTitle {
+    font-size: 1.75rem;
+    position: relative;
+    top: 6px;
+    text-shadow: #000 2px 0 0, #000 1.75517px 0.95885px 0, #000 1.0806px 1.68294px 0, #000 0.14147px 1.99499px 0, #000 -0.83229px 1.81859px 0, #000 -1.60229px 1.19694px 0, #000 -1.97998px 0.28224px 0, #000 -1.87291px -0.70157px 0, #000 -1.30729px -1.5136px 0, #000 -0.42159px -1.95506px 0, #000 0.56732px -1.91785px 0, #000 1.41734px -1.41108px 0, #000 1.92034px -0.55883px 0;
+}
+
+.heroPowerCost {
+    font-size: 4.5rem;
+    position: absolute;
+    top: 35px;
+    left: 30px;
+}
+
+@media (max-width: 1000px) {
+    .heroPowerChoice {
+        transform: scale(.5);
+        margin-right: -170px;
+    }
+  }
+
+.heroPowerChoice:nth-child(2) {
+    background-position: -370px;
+}
+
+.heroPowerChoice:nth-child(3) {
+    background-position: -740px;
+}
+
+.heroPowerChoice:nth-child(4) {
+    background-position: -1110px;
+}
+
+.heroPowerChoice:nth-child(5) {
+    background-position: -1480px;
+}
+
+#allClues {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.clue {
+    margin: 0 8px;
+    display: block
+}
+
+@media (min-width: 800px) {
+    .clue {
+        display: inline;
+    }
+
+    .clue + .clue:before {
+        content: '-';
+        margin-right: 8px;
+    }
+    
+}
+
+.clueIcon {
+    vertical-align: middle;
+    display: inline-block;
+    background-repeat: no-repeat;
+    margin: 0 4px 0 8px;
+    background-image: url(./images/clue_icons.png);
+}
+
+.clueIcon.rarity {
+    width: 27px;
+    height: 39px;
+}
+
+.clueIcon.expansion {
+    width: 39px;
+    height: 39px;
+}
+
+.clueIcon.class {
+    width: 39px;
+    height: 39px;
+    background-position: 0 -39px;
+}
+
+.clueIcon.class.mage {
+    background-position: -136px 0;
+}
+
+.clueIcon.class.demonhunter {
+    background-position: -175px 0;
+}
+
+.clueIcon.class.druid {
+    background-position: -214px 0;
+}
+
+.clueIcon.class.hunter {
+    background-position: -253px 0;
+}
+
+.clueIcon.class.warrior {
+    background-position: -39px -39px;
+}
+
+.clueIcon.class.warlock {
+    background-position: -78px -39px;
+}
+
+.clueIcon.class.shaman {
+    background-position: -117px -39px;
+}
+
+.clueIcon.class.rogue {
+    background-position: -156px -39px;
+}
+
+.clueIcon.class.priest {
+    background-position: -195px -39px;
+}
+
+.clueIcon.class.paladin {
+    background-position: -234px -39px;
+}
+
+#gameEndCards img {
+    width: 200px;
+}
+
+#statsExplanation {
+    text-align: center;
+    margin-top: 4px;
+}
+
+#configForm button {
+    margin-top: 16px;
+}
+
+.warning {
+    position: absolute;
+    right: 78px;
+    bottom: 28px;
+    font-style: italic;
+    font-size: .9rem;
+    opacity: .2;
+    transition: opacity 300ms;
+    display: none;
+}
+
+.warning img {
+    vertical-align: middle;
+    height: 32px;
+}
+
+#configNewGameButton:hover + .warning, #configNewGameButton:focus + .warning {
+    opacity: 1;
+}
+
+#configBackButton:hover ~ .warning, #configBackButton:focus ~ .warning {
+    opacity: 0;
+}
+
+
+fieldset {
+    border-color: #2f2b25;
+    border-style: double;
+    border-radius: 20px;
+    padding: 16px 0 32px 42px;
+    text-align: left;
+}
+
+fieldset + fieldset {
+    margin: 24px 0;
+}
+
+legend {
+    font-weight: bold;
+    padding: 0;
+    font-size: 1.3rem;
+    position: relative;
+    left: -16px;
+}
+
+legend img {
+    height: 40px;
+    vertical-align: middle;
+}
+
+fieldset label {
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 1;
+    display: block;
+}
+
+fieldset label:before {
+    display: inline-block;
+    content: '';
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    background-image: url('./images/radio_buttons.png');
+    background-repeat: no-repeat;
+    background-position: left;
+    margin-right: 8px;
+}
+
+fieldset input[type="radio"] {
+    z-index: -1;
+    position: absolute;
+    transform: scale(.1);
+}
+
+fieldset input:checked + label:before {
+    background-position: right;
+}
+
+fieldset input:focus + label:before {
+    filter: drop-shadow(0px 0px 1px #fff) drop-shadow(0px 0px 1px #fff) drop-shadow(0px 0px 1px #fff) drop-shadow(0px 0px 1px #fff);
+}
