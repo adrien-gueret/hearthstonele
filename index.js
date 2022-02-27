@@ -179,7 +179,7 @@
 			
 			case 'IMAGE_1':
 				Canvas.extractCardIllustration(currentGame.cardToGuess).then(function (canvasIllustration) {
-					var blurryCanvas = Canvas.blurCanvas(canvasIllustration, 22);
+					var blurryCanvas = Canvas.blurCanvas(canvasIllustration, 30);
 					pixelatedIllustration.appendChild(blurryCanvas);
 					pixelatedIllustration.style.display = 'block';
 				});
@@ -187,7 +187,7 @@
 			
 			case 'IMAGE_2':
 				Canvas.extractCardIllustration(currentGame.cardToGuess).then(function (canvasIllustration) {
-					var blurryCanvas = Canvas.blurCanvas(canvasIllustration, 16);
+					var blurryCanvas = Canvas.blurCanvas(canvasIllustration, 20);
 					pixelatedIllustration.appendChild(blurryCanvas);
 				});
 			break;

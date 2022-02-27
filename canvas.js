@@ -46,17 +46,8 @@
 				ctx.beginPath();
 				ctx.moveTo(0, 169);
 				ctx.lineTo(0, 30);
-				ctx.bezierCurveTo(38, 0, 206, 0, 244, 30);
-				
-				//ctx.lineTo(244, 30);
+				ctx.bezierCurveTo(38, 0, 206, 0, 244, 30);				
 				ctx.lineTo(244, 169);
-				/*ctx.moveTo(0, 125);
-				ctx.lineTo(38, 40);
-				ctx.lineTo(52, 8);
-				ctx.bezierCurveTo(103, -3, 172, -8, 241, 30);
-				ctx.lineTo(241, 168);
-				ctx.lineTo(0, 168);
-				*/
 			break;
 			
 			case 7: // Weapon
@@ -89,8 +80,12 @@
 			var pixels = ctx.getImageData(0, 0, width, height).data;
 			
 			var blurryCanvas = document.createElement('canvas');
-			blurryCanvas.width = width;
-			blurryCanvas.height = height;
+			
+			var totalPixelsOnWidth = Math.ceil(width / squareSize);
+			var totalPixelsOnHeight = Math.ceil(height / squareSize);
+			
+			blurryCanvas.width = squareSize * totalPixelsOnWidth;
+			blurryCanvas.height = squareSize * totalPixelsOnHeight;
 			
 			var blurryCtx = blurryCanvas.getContext('2d');
 			

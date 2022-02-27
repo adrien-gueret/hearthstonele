@@ -291,6 +291,10 @@ body {
 	text-align: center;
 }
 
+#pixelatedIllustration canvas {
+	margin: 0 8px;
+} 
+
 .stickyForm {
     position: sticky;
     padding-bottom: 32px;
