@@ -274,7 +274,8 @@
             'heroPowerChoice1_Description', 'heroPowerChoice2_Description', 'heroPowerChoice3_Description', 'heroPowerChoice4_Description', 'heroPowerChoice5_Description', 'heroPowerChoice6_Description', 'heroPowerChoice7_Description', 'heroPowerChoice8_Description', 'heroPowerChoice9_Description',
             'changeCardTitle', 'newCardButtonChange', 'gameEndTitle', 'gameEndButton',
             'configNewGameButton', 'newGameWarning', 'formConfigLanguage', 'formConfigGameMode',
-            'formConfigWildMode', 'formConfigStandardMode', 'configBackButton', 'gameBy',
+            'formConfigWildMode', 'formConfigStandardMode', 'formConfigFirstClue', 'formConfigFlavorText', 'formConfigIllustration',
+			'configBackButton', 'gameBy',
         ].forEach(function (elementId) {
             var element = document.getElementById(elementId);
             element.innerHTML = translate(elementId);
@@ -519,6 +520,7 @@
 
         configForm.elements.namedItem('language').value = window.currentLocale;
         configForm.elements.namedItem('gameMode').value = defaultGameMode;
+        configForm.elements.namedItem('firstClue').value = localStorage.getItem('first_clue') === 'IMAGE_1' ? 'IMAGE_1' : 'FLAVOR_TEXT';
 
         document.getElementById(idToElementToShow).style.display = 'block'
         document.getElementById('configModal').style.display = 'flex';
@@ -557,6 +559,9 @@
 
             var gameMode = configForm.elements.namedItem('gameMode').value;
             localStorage.setItem('user_mode', gameMode);
+			
+			var firstClue = configForm.elements.namedItem('firstClue').value;
+            localStorage.setItem('first_clue', firstClue);
 
             setLocale(language);
             

@@ -28,7 +28,7 @@
         this.hp = Game.MAX_HP;
         this.cardToGuess = null;
         this.usedClues = [];
-		this.defaultClue = localStorage.getItem('default_clue') === 'IMAGE_1' ? 'IMAGE_1' : 'FLAVOR_TEXT';
+		this.defaultClue = localStorage.getItem('first_clue') === 'IMAGE_1' ? 'IMAGE_1' : 'FLAVOR_TEXT';
         this.foundCards = [];
         this.onDie = onDie;
 

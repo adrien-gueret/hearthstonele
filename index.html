@@ -82,9 +82,9 @@
             </svg>
 
             <div class="stickyForm">
-                <blockquote id="flavorText"></blockquote>
 				<div alt="" id="pixelatedIllustration"></div>
-                <div id="allClues"></div>
+                <blockquote id="flavorText"></blockquote>
+				<div id="allClues"></div>
                 <form id="guessForm">
                     <input disabled class="search" type="text" id="searchInput" list="suggestions" autocomplete="off" />
                     <datalist id="suggestions"></datalist>
@@ -335,6 +335,21 @@
 
                         <input type="radio" value="wild" id="modeWild" name="gameMode">
                         <label for="modeWild" id="formConfigWildMode">Libre</label>
+                    </fieldset>
+					
+					<fieldset>
+                        <legend>
+                            <img src="images/icon_clue.svg" alt="" />
+                            <span id="formConfigFirstClue">Indice révélé dès le départ</span>
+                        </legend>
+
+                        <input type="radio" value="FLAVOR_TEXT" id="firstClueFlavorText" name="firstClue" checked>
+                        <label for="firstClueFlavorText" id="formConfigFlavorText">Texte d'ambiance</label>
+
+                        <br/>
+
+                        <input type="radio" value="IMAGE_1" id="firstClueIllustration" name="firstClue">
+                        <label for="firstClueIllustration" id="formConfigIllustration">Illustration pixelisée</label>
                     </fieldset>
 
                     <button type="button" class="button secondary" id="configBackButton">

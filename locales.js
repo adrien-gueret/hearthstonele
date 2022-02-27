@@ -91,6 +91,9 @@
             formConfigGameMode: 'Mode de jeu',
             formConfigWildMode: 'Libre',
             formConfigStandardMode: 'Standard',
+			formConfigFirstClue: 'Indice révélé dès le départ',
+			formConfigFlavorText: 'Texte d\'ambiance',
+			formConfigIllustration: 'Illustration pixelisée',
         },
         en_US: {
             submitButton: 'Submit',
@@ -176,6 +179,9 @@
             formConfigGameMode: 'Game mode',
             formConfigWildMode: 'Wild',
             formConfigStandardMode: 'Standard',
+			formConfigFirstClue: 'Clue revealed from the start',
+			formConfigFlavorText: 'Flavor text',
+			formConfigIllustration: 'Pixelated illustration',
         }
     };
 
