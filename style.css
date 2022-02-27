@@ -717,7 +717,6 @@ td.tableCardName {
 
     max-width: 70%;
     max-height: 80%;
-	overflow: auto;
 }
 
 @media (min-width: 650px) {
