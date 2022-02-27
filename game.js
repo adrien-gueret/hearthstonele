@@ -5,6 +5,10 @@
         EXPANSION: document.getElementById('heroPowerExpansion'),
         INITIALS: document.getElementById('heroPowerInitials'),
         CHANGE: document.getElementById('heroPowerChange'),
+        FLAVOR_TEXT: document.getElementById('heroPowerFlavorText'),
+        IMAGE_1: document.getElementById('heroPowerImage1'),
+        IMAGE_2: document.getElementById('heroPowerImage2'),
+		IMAGE_3: document.getElementById('heroPowerImage3'),
     };
 
     var CLUES_TO_COST = {
@@ -13,6 +17,10 @@
         EXPANSION: 2,
         INITIALS: 3,
         CHANGE: 3,
+		FLAVOR_TEXT: 1,
+		IMAGE_1: 1,
+		IMAGE_2: 2,
+		IMAGE_3: 3,		
     };
     
     function Game(client, onDie) {
@@ -20,6 +28,7 @@
         this.hp = Game.MAX_HP;
         this.cardToGuess = null;
         this.usedClues = [];
+		this.defaultClue = localStorage.getItem('default_clue') === 'IMAGE_1' ? 'IMAGE_1' : 'FLAVOR_TEXT';
         this.foundCards = [];
         this.onDie = onDie;
 
@@ -52,33 +61,49 @@
         }
 
         CLUES_TO_ELEMENT.INITIALS.style.display = 'none';
+        CLUES_TO_ELEMENT.EXPANSION.style.display = 'none';
         CLUES_TO_ELEMENT.CHANGE.style.display = 'none';
+		CLUES_TO_ELEMENT.IMAGE_2.style.display = 'none';
+		CLUES_TO_ELEMENT.IMAGE_3.style.display = 'none';
     };
 
-    Game.prototype.useClue = function(clue) {
-        if (this.usedClues.indexOf(clue) !== -1) {
+    Game.prototype.useClue = function(clue, preventDamages) {
+		var that = this;
+		
+        if (that.usedClues.indexOf(clue) !== -1) {
             return false;
         }
 
-        this.usedClues.push(clue);
+        that.usedClues.push(clue);
         
         CLUES_TO_ELEMENT[clue].style.display = 'none';
         
-        var isDied = this.takeDamages(CLUES_TO_COST[clue]);
+        var isDied = preventDamages ? false : that.takeDamages(CLUES_TO_COST[clue]);
 
         if (isDied) {
             throw new Error('died');
         }
-
-        if (this.usedClues.indexOf('INITIALS') === -1) {
-            CLUES_TO_ELEMENT.INITIALS.style.removeProperty('display');
-        }
-
-        if (this.usedClues.length >= 2 && this.usedClues.indexOf('CHANGE') === -1) {
-            CLUES_TO_ELEMENT.CHANGE.style.removeProperty('display');
-        }
-
-        return this.usedClues.length === Object.keys(CLUES_TO_COST).length;
+		
+		if (clue === 'IMAGE_1') {
+			CLUES_TO_ELEMENT.IMAGE_2.style.removeProperty('display');
+		} else if (clue === 'IMAGE_2') {
+			CLUES_TO_ELEMENT.IMAGE_3.style.removeProperty('display');
+		}
+		
+		var totalButtons = document.querySelectorAll('.heroPowerChoice').length;
+		
+		['INITIALS', 'CHANGE'].forEach(function (heroPower) {
+			var totalHiddenButtons = document.querySelectorAll('.heroPowerChoice[style="display: none;"]').length;
+			var totalShownButtons = totalButtons - totalHiddenButtons;
+		
+			if (totalShownButtons < 3) {
+				if (that.usedClues.indexOf(heroPower) === -1) {
+					CLUES_TO_ELEMENT[heroPower].style.removeProperty('display');
+				}
+			}
+		});
+		
+        return that.usedClues.length === Object.keys(CLUES_TO_COST).length;
     };
 
     Game.prototype.checkGuess = function (nameToCheck) {

@@ -267,20 +267,7 @@ body {
     bottom: 8px;
 }
 
-#whichFlavorText {
-    padding: 8px 16px;
-    margin: 0;
-    font-size: 1.5rem;
-}
-
-@media (min-width: 650px) {
-    #whichFlavorText {
-        padding: 16px 32px;
-        font-size: 2rem;
-    }
-}
-
-blockquote {
+#flavorText {
     border-left: 6px solid currentColor;
     background-image: linear-gradient(90deg, #f3f3f3, rgba(255,255,255,.2));
     border-top-right-radius: 10px;
@@ -289,13 +276,19 @@ blockquote {
     font-size: 1.5rem;
     padding: 8px;
     margin: 16px auto 12px;
+	display: none;
 }
 
 @media (min-width: 650px) {
-    blockquote {
+    #flavorText {
         padding: 16px;
         margin: 32px auto 24px;
     }
+}
+
+#pixelatedIllustration {
+	display: none;
+	text-align: center;
 }
 
 .stickyForm {
@@ -822,22 +815,42 @@ td.tableCardName {
         transform: scale(.5);
         margin-right: -170px;
     }
-  }
+}
 
-.heroPowerChoice:nth-child(2) {
+#heroPowerRarity {
+	 background-position: 0px;
+}
+
+#heroPowerClass {
     background-position: -370px;
 }
 
-.heroPowerChoice:nth-child(3) {
+#heroPowerExpansion {
     background-position: -740px;
 }
 
-.heroPowerChoice:nth-child(4) {
+#heroPowerInitials {
     background-position: -1110px;
 }
 
-.heroPowerChoice:nth-child(5) {
+#heroPowerChange {
     background-position: -1480px;
+}
+
+#heroPowerFlavorText {
+    background-position: -1850px;
+}
+
+#heroPowerImage1 {
+	background-position: -2220px;
+}
+
+#heroPowerImage2 {
+	background-position: -2590px;
+}
+
+#heroPowerImage3 {
+	background-position: -2960px;
 }
 
 #allClues {

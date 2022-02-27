@@ -3,6 +3,8 @@
     var searchInput = document.getElementById('searchInput');
     var submitButton = document.getElementById('submitButton');
     var flavorText = document.getElementById('flavorText');
+    var pixelatedIllustration = document.getElementById('pixelatedIllustration');
+    var cardArt = document.getElementById('cardArt');
     var heroPower = document.getElementById('heroPower');
     var tableHistory = document.getElementById('tableHistory');
     var tableHistoryContainer = document.getElementById('tableHistoryContainer');
@@ -58,19 +60,24 @@
         }
     }
 
-    function useClue(clue, client) {
+    function useClue(clue, client, preventClueDamages) {
         var hasUsedAllClues = true;
         activeConfigNewGameWarning();
-        
+		
         try {
-            hasUsedAllClues = currentGame.useClue(clue);
-        } catch (e) {
+            hasUsedAllClues = currentGame.useClue(clue, preventClueDamages);
+        } catch (e) {console.log(e);
             return;
         } finally {
             closeHeroPowerModal(hasUsedAllClues, clue);
         }
 
         switch (clue) {
+			case 'FLAVOR_TEXT':
+				flavorText.innerHTML = currentGame.cardToGuess.flavorText;
+				flavorText.style.display = 'block';
+			break;
+			
             case 'INITIALS':
                 var censuredName = currentGame.cardToGuess
                     .name.split(' ')
@@ -169,24 +176,50 @@
                     allClues.appendChild(clue);
                 });
             break;
+			
+			case 'IMAGE_1':
+				Canvas.extractCardIllustration(currentGame.cardToGuess).then(function (canvasIllustration) {
+					var blurryCanvas = Canvas.blurCanvas(canvasIllustration, 22);
+					pixelatedIllustration.appendChild(blurryCanvas);
+					pixelatedIllustration.style.display = 'block';
+				});
+			break;
+			
+			case 'IMAGE_2':
+				Canvas.extractCardIllustration(currentGame.cardToGuess).then(function (canvasIllustration) {
+					var blurryCanvas = Canvas.blurCanvas(canvasIllustration, 16);
+					pixelatedIllustration.appendChild(blurryCanvas);
+				});
+			break;
+			
+			case 'IMAGE_3':
+				Canvas.extractCardIllustration(currentGame.cardToGuess).then(function (canvasIllustration) {
+					var blurryCanvas = Canvas.blurCanvas(canvasIllustration, 10);
+					pixelatedIllustration.appendChild(blurryCanvas);
+				});
+			break;
 
             default: return;
         }
     }
 
-    function newGameRound() {
-        tableHistoryContainer.style.display = 'none';
+    function newGameRound(client) {
+        pixelatedIllustration.style.display = 'none';
+		pixelatedIllustration.innerHTML = '';
+        flavorText.style.display = 'none';
+		tableHistoryContainer.style.display = 'none';
         tableHistory.tBodies[0].innerHTML = '';
         searchInput.value = '';
         searchInput.placeholder = '';
         allClues.innerHTML = '';
         suggestions.innerHTML = '';
 
-        currentGame.newRound().then(function (card) {
+        currentGame.newRound().then(function () {
             resetHeroPower();
-            
-            flavorText.innerHTML = card.flavorText;
-          
+			
+			var preventClueDamages = true;
+			useClue(currentGame.defaultClue, client, preventClueDamages);
+			
             searchInput.disabled = false;
             submitButton.disabled = false;
         });
@@ -228,17 +261,17 @@
         
         goToGame();
        
-        newGameRound();
+        newGameRound(client);
     }
 
     function translateUI() {
         [
             'guessSubtitle', 'rules1', 'rules2', 'rules3', 'statsExplanation',
             'howManyCanYouGuess', 'submitButton',
-            'whichFlavorText', 'roundSuccessTitle', 'errorModalButton', 'hasBeenRestored', 'cancelHeroPowerButton',
+            'roundSuccessTitle', 'errorModalButton', 'hasBeenRestored', 'cancelHeroPowerButton',
             'heroPowerDetailsTitle', 'heroPowerDetailsDescription',
-            'heroPowerChoice1_Title', 'heroPowerChoice2_Title', 'heroPowerChoice3_Title', 'heroPowerChoice4_Title', 'heroPowerChoice5_Title',
-            'heroPowerChoice1_Description', 'heroPowerChoice2_Description', 'heroPowerChoice3_Description', 'heroPowerChoice4_Description', 'heroPowerChoice5_Description',
+            'heroPowerChoice1_Title', 'heroPowerChoice2_Title', 'heroPowerChoice3_Title', 'heroPowerChoice4_Title', 'heroPowerChoice5_Title', 'heroPowerChoice6_Title', 'heroPowerChoice7_Title', 'heroPowerChoice8_Title', 'heroPowerChoice9_Title',
+            'heroPowerChoice1_Description', 'heroPowerChoice2_Description', 'heroPowerChoice3_Description', 'heroPowerChoice4_Description', 'heroPowerChoice5_Description', 'heroPowerChoice6_Description', 'heroPowerChoice7_Description', 'heroPowerChoice8_Description', 'heroPowerChoice9_Description',
             'changeCardTitle', 'newCardButtonChange', 'gameEndTitle', 'gameEndButton',
             'configNewGameButton', 'newGameWarning', 'formConfigLanguage', 'formConfigGameMode',
             'formConfigWildMode', 'formConfigStandardMode', 'configBackButton', 'gameBy',
@@ -440,6 +473,10 @@
         document.getElementById('heroPowerExpansion').onclick = () => useClue('EXPANSION', client);
         document.getElementById('heroPowerInitials').onclick = () => useClue('INITIALS', client);
         document.getElementById('heroPowerChange').onclick = () => useClue('CHANGE', client);
+        document.getElementById('heroPowerFlavorText').onclick = () => useClue('FLAVOR_TEXT', client);
+        document.getElementById('heroPowerImage1').onclick = () => useClue('IMAGE_1', client);
+        document.getElementById('heroPowerImage2').onclick = () => useClue('IMAGE_2', client);
+        document.getElementById('heroPowerImage3').onclick = () => useClue('IMAGE_3', client);
 
         document.getElementById('cancelHeroPowerButton').onclick = () => closeHeroPowerModal();
 
@@ -450,7 +487,7 @@
 
             document.body.style.pointerEvents = 'none';
 
-            newGameRound();
+            newGameRound(client);
 
             window.setTimeout(function () {
                 document.body.style.removeProperty('pointer-events');
@@ -461,7 +498,7 @@
 
         document.getElementById('newCardButtonChange').onclick = function() {
             document.getElementById('changeCard').style.display = 'none';
-            newGameRound();
+            newGameRound(client);
         };
     }
 
