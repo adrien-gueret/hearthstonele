@@ -22,7 +22,7 @@
 		IMAGE_2: 2,
 		IMAGE_3: 3,		
     };
-    
+
     function Game(client, onDie) {
         this.client = client;
         this.hp = Game.MAX_HP;
@@ -60,7 +60,28 @@
         for(var i = 0, l = clueButtons.length; i < l; i++) {
             clueButtons[i].style.display = 'none';
         }
+		
+		this._nextImageClue = 'IMAGE_1';
     };
+
+	Game.prototype.updateCluesUI = function() {
+		var totalButtons = document.querySelectorAll('.heroPowerChoice').length;
+		
+		var cluesToReveal = ['FLAVOR_TEXT', this._nextImageClue, 'RARITY', 'CLASS', 'EXPANSION']
+			.sort(() => Math.random() - 0.5)
+			.concat('INITIALS', 'CHANGE');
+		
+		cluesToReveal.forEach(function (heroPower) {
+			var totalHiddenButtons = document.querySelectorAll('.heroPowerChoice[style="display: none;"]').length;
+			var totalShownButtons = totalButtons - totalHiddenButtons;
+		
+			if (totalShownButtons < 3) {
+				if (that.usedClues.indexOf(heroPower) === -1) {
+					CLUES_TO_ELEMENT[heroPower].style.removeProperty('display');
+				}
+			}
+		});
+	};
 
     Game.prototype.useClue = function(clue, preventDamages) {
 		var that = this;
@@ -85,22 +106,7 @@
 			this._nextImageClue = 'IMAGE_3';
 		}
 		
-		var totalButtons = document.querySelectorAll('.heroPowerChoice').length;
-		
-		var cluesToReveal = ['FLAVOR_TEXT', this._nextImageClue, 'RARITY', 'CLASS', 'EXPANSION']
-			.sort(() => Math.random() - 0.5)
-			.concat('INITIALS', 'CHANGE');
-		
-		cluesToReveal.forEach(function (heroPower) {
-			var totalHiddenButtons = document.querySelectorAll('.heroPowerChoice[style="display: none;"]').length;
-			var totalShownButtons = totalButtons - totalHiddenButtons;
-		
-			if (totalShownButtons < 3) {
-				if (that.usedClues.indexOf(heroPower) === -1) {
-					CLUES_TO_ELEMENT[heroPower].style.removeProperty('display');
-				}
-			}
-		});
+		this.updateCluesUI();
 		
         return that.usedClues.length === Object.keys(CLUES_TO_COST).length;
     };
