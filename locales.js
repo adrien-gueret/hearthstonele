@@ -10,7 +10,7 @@
         fr_FR: {
             submitButton: 'Envoyer',
             guessSubtitle: 'Devinez un maximum de cartes Hearthstone&nbsp;!',
-            rules1: 'Vous avez 30 points de vie. Utilisez-les pour trouver des cartes Hearthstone à partir de leur texte d\'ambiance ou leur illustration pixelisée.<br />Chaque erreur vous inflige 1 point de dégât, mais chaque bonne réponse vous soigne de 3.',
+            rules1: 'Vous avez 30 points de vie. Utilisez-les pour trouver des cartes Hearthstone à partir de leur texte d\'ambiance ou leur illustration pixelisée.<br />Chaque erreur vous inflige 1 point de dégât, mais chaque bonne réponse vous soigne de 2.',
             rules2: 'Pour chaque erreur, vous récupérez des indications sur les statistiques de la carte à rechercher :',
             rules3: 'Vous pouvez aussi payer des points de vie pour récupérer des indices supplémentaires sur la classe, la rareté etc.',
             howManyCanYouGuess: 'Combien de cartes Hearthstone pouvez-vous deviner avant de perdre tous vos points de vie&nbsp;?',
@@ -40,7 +40,7 @@
                 return 'Il \'y a pas de ' + value + ' dans les stats de la carte recherchée.';
             },
             roundSuccessTitle: 'Bien joué !',
-            hasBeenRestored: 'Vous avez été soigné de 3 points de vie.',
+            hasBeenRestored: 'Vous avez été soigné de 2 points de vie.',
             newCardButton: 'Nouvelle carte',
             changeCardTitle: 'La carte recherchée était :',
             newCardButtonChange: 'Nouvelle carte',
@@ -98,7 +98,7 @@
         en_US: {
             submitButton: 'Submit',
             guessSubtitle: 'Guess as many Hearthstone cards as possible!',
-            rules1: 'You have 30 health points. Use them to find Hearthstone cards from their flavor text or their pixelated art.<br />Each error deals 1 damage to you, but each good guess restores 3 health.',
+            rules1: 'You have 30 health points. Use them to find Hearthstone cards from their flavor text or their pixelated art.<br />Each error deals 1 damage to you, but each good guess restores 2 health.',
             rules2: 'For each error, you get some indics about the card stats:',
             rules3: 'You can also take damage to earn some clues about card class, rarity etc.',
             howManyCanYouGuess: 'How many Hearthstone cards can you guess before loosing all your HPs?',
@@ -128,7 +128,7 @@
                 return 'There is no ' + value + ' in the stats of the card to find.';
             },
             roundSuccessTitle: 'Well play!',
-            hasBeenRestored: "You've restored 3 health.",
+            hasBeenRestored: "You've restored 2 health.",
             newCardButton: 'New card',
             changeCardTitle: 'The card to find was:',
             newCardButtonChange: 'New card',
