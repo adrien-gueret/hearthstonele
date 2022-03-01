@@ -16,7 +16,7 @@
         CLASS: 1,
         EXPANSION: 2,
         INITIALS: 3,
-        CHANGE: 3,
+        CHANGE: 1,
 		FLAVOR_TEXT: 1,
 		IMAGE_1: 1,
 		IMAGE_2: 2,
