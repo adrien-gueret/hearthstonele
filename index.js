@@ -220,6 +220,8 @@
         searchInput.placeholder = '';
         allClues.innerHTML = '';
         suggestions.innerHTML = '';
+		
+		document.body.className = client.cardSetGroup;
 
         currentGame.newRound().then(function () {
             resetHeroPower();

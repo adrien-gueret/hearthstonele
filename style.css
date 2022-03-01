@@ -24,6 +24,16 @@ body {
     font-size: 16px;
 }
 
+body.wild::before {
+	content: '';
+	display: block;
+	pointer-events: none;
+	position: fixed;
+	z-index: 0;
+	inset: 0;
+	background-color: rgba(97, 67, 38, 0.2);
+}
+
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; }  }
 
 #header {
@@ -35,6 +45,7 @@ body {
     display: flex;
     align-items: center;
     padding: 0 32px;
+	position: relative;
 }
 
 #header > * {
@@ -42,7 +53,7 @@ body {
     padding: 0;
 }
 
-#header h2 {
+#guessSubtitle {
     font-size: 1rem;
     font-style: italic;
     margin-left: 12px;
@@ -50,10 +61,27 @@ body {
     display: none;
 }
 
-@media (min-width: 650px) {
-    #header h2 {
-        display: block;
-    }
+.wild #header::before {
+	content: '';
+    display: block;
+    width: 219px;
+    height: 85px;
+    background-image: url(./images/wild2.png);
+    position: absolute;
+    left: 0;
+    top: 49px;
+}
+
+.wild #header::after {
+	content: '';
+    display: block;
+    width: 87px;
+    height: 53px;
+    position: absolute;
+    background-image: url(./images/wild1.png);
+    right: 0;
+    top: 36px;
+	transform: scaleX(-1);
 }
 
 #rules .gameBy {
@@ -105,6 +133,10 @@ body {
 }
 
 @media (min-width: 650px) {
+	#guessSubtitle {
+		display: block;
+	}
+	
     #rules {
         padding: 32px 64px;
     }
@@ -310,12 +342,7 @@ body {
 } 
 
 .stickyForm {
-    position: relative;
     padding-bottom: 32px;
-    top: 0;
-    background-color: #ebd6ab;
-    background-image: url(./images/background.jpg);
-    z-index: 50;
 }
 
 #player {
@@ -335,7 +362,18 @@ body {
         transform: scale(1);
         left: calc(50vw - 130px);
         bottom: 32px;
-    }    
+    }
+	
+	.wild #player::after {
+		content: '';
+		display: block;
+		width: 87px;
+		height: 53px;
+		position: absolute;
+		background-image: url(./images/wild1.png);
+		left: 1px;
+		bottom: -11px;
+	}
 }
 
 #damage {
