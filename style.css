@@ -296,7 +296,7 @@ body {
 } 
 
 .stickyForm {
-    position: sticky;
+    position: relative;
     padding-bottom: 32px;
     top: 0;
     background-color: #ebd6ab;
