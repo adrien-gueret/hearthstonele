@@ -55,9 +55,11 @@
             resetHeroPower();
         }
         
-        if (usedClue !== 'CHANGE') {
+        if (usedClue !== 'CHANGE' && window.innerWidth > 800 && window.innerHeight > 600) {
             searchInput.focus();
         }
+		
+		window.scrollTo(0, 0);
     }
 
     function useClue(clue, client, preventClueDamages) {
