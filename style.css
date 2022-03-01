@@ -980,17 +980,22 @@ td.tableCardName {
     opacity: 0;
 }
 
+.fieldsetContainer {
+	display: flex;
+    flex-wrap: wrap;
+	flex-direction: row;
+    align-items: center;
+	justify-content: center;
+}
 
 fieldset {
     border-color: #2f2b25;
     border-style: double;
     border-radius: 20px;
-    padding: 16px 0 32px 42px;
+    padding: 16px;
     text-align: left;
-}
-
-fieldset + fieldset {
-    margin: 24px 0;
+	margin: 24px;
+	flex-shrink: 0;
 }
 
 legend {

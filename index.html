@@ -307,56 +307,60 @@
         <div id="configModal" class="modalOverlay">
             <div class="modal">
                 <form id="configForm" class="modalInner">
-                    <fieldset>
-                        <legend>
-                            <img src="images/icon_language.svg" alt="" />
-                            <span id="formConfigLanguage">Langue</span>
-                        </legend>
+					<div class="fieldsetContainer">
+						<fieldset>
+							<legend>
+								<img src="images/icon_language.svg" alt="" />
+								<span id="formConfigLanguage">Langue</span>
+							</legend>
 
-                        <input type="radio" value="en_US" id="languageEN" name="language">
-                        <label for="languageEN">English</label>
-                        
-                        <br/>
+							<input type="radio" value="en_US" id="languageEN" name="language">
+							<label for="languageEN">English</label>
+							
+							<br/>
 
-                        <input type="radio" value="fr_FR" id="languageFR" name="language">
-                        <label for="languageFR">Français</label>
-                    </fieldset>
+							<input type="radio" value="fr_FR" id="languageFR" name="language">
+							<label for="languageFR">Français</label>
+						</fieldset>
 
-                    <fieldset>
-                        <legend>
-                            <img src="images/icon_game_mode.svg" alt="" />
-                            <span id="formConfigGameMode">Mode de jeu</span>
-                        </legend>
+						<fieldset>
+							<legend>
+								<img src="images/icon_game_mode.svg" alt="" />
+								<span id="formConfigGameMode">Mode de jeu</span>
+							</legend>
 
-                        <input type="radio" value="standard" id="modeStandard" name="gameMode" checked>
-                        <label for="modeStandard" id="formConfigStandardMode">Standard</label>
+							<input type="radio" value="standard" id="modeStandard" name="gameMode" checked>
+							<label for="modeStandard" id="formConfigStandardMode">Standard</label>
 
-                        <br/>
+							<br/>
 
-                        <input type="radio" value="wild" id="modeWild" name="gameMode">
-                        <label for="modeWild" id="formConfigWildMode">Libre</label>
-                    </fieldset>
+							<input type="radio" value="wild" id="modeWild" name="gameMode">
+							<label for="modeWild" id="formConfigWildMode">Libre</label>
+						</fieldset>
+						
+						<fieldset>
+							<legend>
+								<img src="images/icon_clue.svg" alt="" />
+								<span id="formConfigFirstClue">Indice révélé dès le départ</span>
+							</legend>
+
+							<input type="radio" value="FLAVOR_TEXT" id="firstClueFlavorText" name="firstClue" checked>
+							<label for="firstClueFlavorText" id="formConfigFlavorText">Texte d'ambiance</label>
+
+							<br/>
+
+							<input type="radio" value="IMAGE_1" id="firstClueIllustration" name="firstClue">
+							<label for="firstClueIllustration" id="formConfigIllustration">Illustration pixelisée</label>
+						</fieldset>
+                    </div>
 					
-					<fieldset>
-                        <legend>
-                            <img src="images/icon_clue.svg" alt="" />
-                            <span id="formConfigFirstClue">Indice révélé dès le départ</span>
-                        </legend>
-
-                        <input type="radio" value="FLAVOR_TEXT" id="firstClueFlavorText" name="firstClue" checked>
-                        <label for="firstClueFlavorText" id="formConfigFlavorText">Texte d'ambiance</label>
-
-                        <br/>
-
-                        <input type="radio" value="IMAGE_1" id="firstClueIllustration" name="firstClue">
-                        <label for="firstClueIllustration" id="formConfigIllustration">Illustration pixelisée</label>
-                    </fieldset>
-
-                    <button type="button" class="button secondary" id="configBackButton">
-                        Annuler
-                    </button>
-                    <button class="button" id="configNewGameButton">Nouvelle partie</button>
-                    <aside id="newGameWarningContainer" class="warning"><img src="./images/alert.png" alt="" /><span id="newGameWarning">Votre partie actuelle sera perdue !</span></aside>
+					<div>
+						<button type="button" class="button secondary" id="configBackButton">
+							Annuler
+						</button>
+						<button class="button" id="configNewGameButton">Nouvelle partie</button>
+						<aside id="newGameWarningContainer" class="warning"><img src="./images/alert.png" alt="" /><span id="newGameWarning">Votre partie actuelle sera perdue !</span></aside>
+					</div>
                 </form>
             </div>
         </div>
