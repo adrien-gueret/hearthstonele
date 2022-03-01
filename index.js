@@ -280,7 +280,7 @@
     function translateUI() {
         [
             'guessSubtitle', 'rules1', 'rules2', 'rules3', 'statsExplanation',
-            'howManyCanYouGuess', 'submitButton',
+            'howManyCanYouGuess', 'submitButton', 'whichFlavorText',
             'roundSuccessTitle', 'errorModalButton', 'hasBeenRestored', 'cancelHeroPowerButton',
             'heroPowerDetailsTitle', 'heroPowerDetailsDescription',
             'heroPowerChoice1_Title', 'heroPowerChoice2_Title', 'heroPowerChoice3_Title', 'heroPowerChoice4_Title', 'heroPowerChoice5_Title', 'heroPowerChoice6_Title', 'heroPowerChoice7_Title', 'heroPowerChoice8_Title', 'heroPowerChoice9_Title',
