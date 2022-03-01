@@ -706,7 +706,6 @@ td.tableCardName {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 64px;
     
     border-style: solid;
     border-image: url(./images/modale.png);
@@ -714,9 +713,7 @@ td.tableCardName {
     border-image-slice: 25 fill;
     color: #f3f3f3;
     text-align: center;
-
-    max-width: 70%;
-    max-height: 80%;
+	padding: 16px;
 }
 
 @media (min-width: 650px) {
@@ -725,6 +722,9 @@ td.tableCardName {
         animation: slideUp 1s;
         animation-timing-function: ease-in-out;
         animation-fill-mode: forwards;
+		padding: 64px;
+		max-width: 70%;
+		max-height: 80%;
     }
 }
 
@@ -996,6 +996,14 @@ fieldset {
     text-align: left;
 	margin: 24px;
 	flex-shrink: 0;
+	box-sizing: border-box;
+	width: 80%;
+}
+
+@media (min-width: 650px) {
+    fieldset {
+        width: auto;
+    }
 }
 
 legend {
