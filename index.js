@@ -463,7 +463,7 @@
 
                 modalContainer.style.display = 'flex';
 
-                currentGame.restoreHealth(3);
+                currentGame.restoreHealth(2);
             }
         };
 

@@ -31,6 +31,7 @@
 		this.defaultClue = localStorage.getItem('first_clue') === 'IMAGE_1' ? 'IMAGE_1' : 'FLAVOR_TEXT';
         this.foundCards = [];
         this.onDie = onDie;
+		this._nextImageClue = 'IMAGE_1';
 
         this.updateHealthUI();
     }
@@ -57,14 +58,8 @@
         var clueButtons = document.querySelectorAll('.heroPowerChoice');
 
         for(var i = 0, l = clueButtons.length; i < l; i++) {
-            clueButtons[i].style.removeProperty('display');
+            clueButtons[i].style.display = 'none';
         }
-
-        CLUES_TO_ELEMENT.INITIALS.style.display = 'none';
-        CLUES_TO_ELEMENT.EXPANSION.style.display = 'none';
-        CLUES_TO_ELEMENT.CHANGE.style.display = 'none';
-		CLUES_TO_ELEMENT.IMAGE_2.style.display = 'none';
-		CLUES_TO_ELEMENT.IMAGE_3.style.display = 'none';
     };
 
     Game.prototype.useClue = function(clue, preventDamages) {
@@ -85,14 +80,18 @@
         }
 		
 		if (clue === 'IMAGE_1') {
-			CLUES_TO_ELEMENT.IMAGE_2.style.removeProperty('display');
+			this._nextImageClue = 'IMAGE_2';
 		} else if (clue === 'IMAGE_2') {
-			CLUES_TO_ELEMENT.IMAGE_3.style.removeProperty('display');
+			this._nextImageClue = 'IMAGE_3';
 		}
 		
 		var totalButtons = document.querySelectorAll('.heroPowerChoice').length;
 		
-		['INITIALS', 'CHANGE'].forEach(function (heroPower) {
+		var cluesToReveal = ['FLAVOR_TEXT', this._nextImageClue, 'RARITY', 'CLASS', 'EXPANSION']
+			.sort(() => Math.random() - 0.5)
+			.concat('INITIALS', 'CHANGE');
+		
+		cluesToReveal.forEach(function (heroPower) {
 			var totalHiddenButtons = document.querySelectorAll('.heroPowerChoice[style="display: none;"]').length;
 			var totalShownButtons = totalButtons - totalHiddenButtons;
 		
