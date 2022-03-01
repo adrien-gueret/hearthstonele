@@ -28,7 +28,6 @@
         this.hp = Game.MAX_HP;
         this.cardToGuess = null;
         this.usedClues = [];
-		this.defaultClue = localStorage.getItem('first_clue') === 'IMAGE_1' ? 'IMAGE_1' : 'FLAVOR_TEXT';
         this.foundCards = [];
         this.onDie = onDie;
 		this._nextImageClue = 'IMAGE_1';
@@ -65,9 +64,10 @@
     };
 
 	Game.prototype.updateCluesUI = function() {
+		var that = this;
 		var totalButtons = document.querySelectorAll('.heroPowerChoice').length;
 		
-		var cluesToReveal = ['FLAVOR_TEXT', this._nextImageClue, 'RARITY', 'CLASS', 'EXPANSION']
+		var cluesToReveal = ['FLAVOR_TEXT', that._nextImageClue, 'RARITY', 'CLASS', 'EXPANSION']
 			.sort(() => Math.random() - 0.5)
 			.concat('INITIALS', 'CHANGE');
 		

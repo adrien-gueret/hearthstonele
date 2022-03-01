@@ -94,6 +94,7 @@
 			formConfigFirstClue: 'Indice révélé dès le départ',
 			formConfigFlavorText: 'Texte d\'ambiance',
 			formConfigIllustration: 'Illustration pixelisée',
+			formConfigNone: 'Aucun !',
         },
         en_US: {
             submitButton: 'Submit',
@@ -182,6 +183,7 @@
 			formConfigFirstClue: 'Clue revealed from the start',
 			formConfigFlavorText: 'Flavor text',
 			formConfigIllustration: 'Pixelated illustration',
+			formConfigNone: 'None!',
         }
     };
 

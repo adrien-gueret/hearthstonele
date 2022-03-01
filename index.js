@@ -12,11 +12,16 @@
     var allClues = document.getElementById('allClues');
     var scoreAnimation = document.getElementById('scoreAnimation');
     var configForm = document.getElementById('configForm');
-
+	
     var hasStartedGame = false;
 
     var currentGame = null;
     var suggestedCards = [];
+	
+	function getDefaultClue() {
+		var storedDefaultClue = localStorage.getItem('first_clue');
+		return ['IMAGE_1', 'FLAVOR_TEXT', 'NONE'].indexOf(storedDefaultClue) === -1 ? 'FLAVOR_TEXT' : storedDefaultClue;
+	}
 
     function getStatTitle(statType, value, status) {
         switch (status) {
@@ -220,7 +225,13 @@
             resetHeroPower();
 			
 			var preventClueDamages = true;
-			useClue(currentGame.defaultClue, client, preventClueDamages);
+			var defaultClue = getDefaultClue();
+			
+			if (defaultClue && defaultClue !== 'NONE') {
+				useClue(defaultClue, client, preventClueDamages);
+			} else {
+				currentGame.updateCluesUI();
+			}
 			
             searchInput.disabled = false;
             submitButton.disabled = false;
@@ -276,7 +287,7 @@
             'heroPowerChoice1_Description', 'heroPowerChoice2_Description', 'heroPowerChoice3_Description', 'heroPowerChoice4_Description', 'heroPowerChoice5_Description', 'heroPowerChoice6_Description', 'heroPowerChoice7_Description', 'heroPowerChoice8_Description', 'heroPowerChoice9_Description',
             'changeCardTitle', 'newCardButtonChange', 'gameEndTitle', 'gameEndButton',
             'configNewGameButton', 'newGameWarning', 'formConfigLanguage', 'formConfigGameMode',
-            'formConfigWildMode', 'formConfigStandardMode', 'formConfigFirstClue', 'formConfigFlavorText', 'formConfigIllustration',
+            'formConfigWildMode', 'formConfigStandardMode', 'formConfigFirstClue', 'formConfigFlavorText', 'formConfigIllustration', 'formConfigNone',
 			'configBackButton', 'gameBy',
         ].forEach(function (elementId) {
             var element = document.getElementById(elementId);
@@ -522,7 +533,7 @@
 
         configForm.elements.namedItem('language').value = window.currentLocale;
         configForm.elements.namedItem('gameMode').value = defaultGameMode;
-        configForm.elements.namedItem('firstClue').value = localStorage.getItem('first_clue') === 'IMAGE_1' ? 'IMAGE_1' : 'FLAVOR_TEXT';
+        configForm.elements.namedItem('firstClue').value = getDefaultClue();
 
         document.getElementById(idToElementToShow).style.display = 'block'
         document.getElementById('configModal').style.display = 'flex';
