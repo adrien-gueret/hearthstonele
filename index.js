@@ -279,10 +279,10 @@
         newGameRound(client);
     }
 
-    function translateUI() {
+    function translateUI(client) {
         [
             'guessSubtitle', 'rules1', 'rules2', 'rules3', 'statsExplanation',
-            'howManyCanYouGuess', 'submitButton', 'whichFlavorText',
+            'howManyCanYouGuess', 'submitButton',
             'roundSuccessTitle', 'errorModalButton', 'hasBeenRestored', 'cancelHeroPowerButton',
             'heroPowerDetailsTitle', 'heroPowerDetailsDescription',
             'heroPowerChoice1_Title', 'heroPowerChoice2_Title', 'heroPowerChoice3_Title', 'heroPowerChoice4_Title', 'heroPowerChoice5_Title', 'heroPowerChoice6_Title', 'heroPowerChoice7_Title', 'heroPowerChoice8_Title', 'heroPowerChoice9_Title',
@@ -308,6 +308,10 @@
         document.getElementById('sampleStatsCost').title = translate('statTitle_cost_ok', 6);
         document.getElementById('sampleStatsAttack').title = translate('statTitle_attack_almost', 4);
         document.getElementById('sampleStatsHealth').title = translate('statTitle_ko', 9);
+		
+		document.getElementById('guessCard').innerHTML = translate('guessCard',
+			translate(client.cardSetGroup === 'wild' ? 'formConfigWildMode' : 'formConfigStandardMode').toLowerCase()
+		);
     }
 
     function showErrorModal(title, content) {
@@ -546,7 +550,7 @@
             client.setLocale(newLocale);
             window.currentLocale = newLocale;
     
-            translateUI();
+            translateUI(client);
         }
     
         disableConfigNewGameWarning();
@@ -578,9 +582,10 @@
 			var firstClue = configForm.elements.namedItem('firstClue').value;
             localStorage.setItem('first_clue', firstClue);
 
+			client.setCardSetGroup(gameMode);
+
             setLocale(language);
             
-            client.setCardSetGroup(gameMode);
             client.onReady(startNewGame);
         };
 
@@ -601,7 +606,9 @@
         showErrorModal(translate('errorRequestTitle'), translate('errorRequestContent'));
     }
 
-    translateUI();
+	var clientApi = new Client(onClientInit, onRequestError);
 
-    onRender(new Client(onClientInit, onRequestError));
+    translateUI(clientApi);
+
+    onRender(clientApi);
 })();

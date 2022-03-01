@@ -17,7 +17,9 @@
             rulesButton: 'Jouer !',
             gameBy: 'Un jeu par ',
             statsExplanation: 'Ici, nous apprenons que la carte à rechercher a un coût en mana de 6, qu\'il n\'y a pas de 9 dans ses stats et que le 4 est présent mais mal placé. On peut donc déduire que la vie (si c\'est un serviteur), l\'armure (si c\'est un héro) ou la durabiltié (si c\'est une arme) de la carte à trouver est de 4. Peut-être <a href="https://playhearthstone.com/fr-fr/cards/59555-forest-warden-omu" target="_blank">Gardienne de la forêt Omu</a>&nbsp;?',
-            whichFlavorText: 'Devinez la carte à trouver&nbsp;!',
+            guessCard: function (mode) {
+				return 'Devinez la carte <b>' + mode + '</b> à trouver&nbsp;!';
+			},
 			tableHistoryName: 'Nom',
             statTitle_cost_ok: function (value) {
                 return 'Le coût en mana de la carte recherchée est bien de ' + value + '.';
@@ -107,7 +109,9 @@
             rulesButton: 'Play!',
             gameBy: 'A game by ',
             statsExplanation: 'Here, we learn that the card to find has its mana cost equals to 6. There are no 9 in its stats, and there is a 4 but this one is in the wrong spot. We can deduce that the health (if it\'s a minion), the armor (if it\'s an hero) or the durability (if it\'s a weapon) is 4. Maybe <a href="https://playhearthstone.com/en-us/cards/59555-forest-warden-omu" target="_blank">Forest Warden Omu</a>?',
-            whichFlavorText: 'Guess the card!',
+            guessCard: function (mode) {
+				return 'Guess the <b>' + mode + '</b> card!';
+			},
 			tableHistoryName: 'Name',
             statTitle_cost_ok: function (value) {
                 return 'The mana cost of the card to find is indeed ' + value + '.';
