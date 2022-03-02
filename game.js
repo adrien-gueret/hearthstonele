@@ -208,9 +208,12 @@
             healthContainer.classList.remove('hurt');
         }
     };
+	
+	Game.prototype.validateCurrentCard = function() {
+		this.foundCards.push(this.cardToGuess);
+	};
 
     Game.prototype.incrementScore = function() {
-        this.foundCards.push(this.cardToGuess);
         var scoreNode = document.getElementById('score');
         
         scoreNode.innerHTML = this.foundCards.length;

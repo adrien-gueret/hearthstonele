@@ -73,7 +73,7 @@
 		
         try {
             hasUsedAllClues = currentGame.useClue(clue, preventClueDamages);
-        } catch (e) {console.log(e);
+        } catch (e) {
             return;
         } finally {
             closeHeroPowerModal(hasUsedAllClues, clue);
@@ -502,11 +502,12 @@
 
         document.getElementById('newCardButtonSuccess').onclick = () => {
             roundSuccess.style.display = 'none';
-
+		
             scoreAnimation.style.display = 'block';
 
             document.body.style.pointerEvents = 'none';
 
+			currentGame.validateCurrentCard();
             newGameRound(client);
 
             window.setTimeout(function () {
