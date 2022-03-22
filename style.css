@@ -24,7 +24,7 @@ body {
     font-size: 16px;
 }
 
-body.wild::before {
+body.wild::before, body.battlegrounds::before {
 	content: '';
 	display: block;
 	pointer-events: none;
@@ -32,6 +32,10 @@ body.wild::before {
 	z-index: 0;
 	inset: 0;
 	background-color: rgba(97, 67, 38, 0.2);
+}
+
+body.battlegrounds::before {
+	background-color: rgba(215, 95, 95, 0.2);
 }
 
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; }  }
@@ -314,6 +318,22 @@ body.wild::before {
     transform-origin: bottom left;
     z-index: 100;
     transform: scale(.7);
+}
+
+.bob-normal {
+    display: inline;
+}
+
+.bob-battlegrounds {
+    display: none;
+}
+
+.battlegrounds .bob-normal {
+    display: none;
+}
+
+.battlegrounds .bob-battlegrounds {
+    display: inline;
 }
 
 #damage {
