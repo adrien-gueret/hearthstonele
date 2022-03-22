@@ -338,6 +338,11 @@
 
 							<input type="radio" value="wild" id="modeWild" name="gameMode">
 							<label for="modeWild" id="formConfigWildMode">Libre</label>
+
+                            <br/>
+
+                            <input type="radio" value="battlegrounds" id="modeBattlegrounds" name="gameMode">
+							<label for="modeBattlegrounds" id="formConfigBattlegroundsMode">Champ de bataille</label>
 						</fieldset>
 						
 						<fieldset>
@@ -346,10 +351,12 @@
 								<span id="formConfigFirstClue">Indice révélé dès le départ</span>
 							</legend>
 
-							<input type="radio" value="FLAVOR_TEXT" id="firstClueFlavorText" name="firstClue" checked>
-							<label for="firstClueFlavorText" id="formConfigFlavorText">Texte d'ambiance</label>
+                            <span id="firstClueFlavorTextContainer">
+                                <input type="radio" value="FLAVOR_TEXT" id="firstClueFlavorText" name="firstClue" checked>
+                                <label for="firstClueFlavorText" id="formConfigFlavorText">Texte d'ambiance</label>
 
-							<br/>
+                                <br/>
+                            </span>
 
 							<input type="radio" value="IMAGE_1" id="firstClueIllustration" name="firstClue">
 							<label for="firstClueIllustration" id="formConfigIllustration">Illustration pixelisée</label>

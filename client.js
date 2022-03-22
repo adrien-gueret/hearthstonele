@@ -18,11 +18,13 @@
         this.hearthstoneMetadata = {
             fr_FR:  getHearthstoneMetadaFromLocalStorage('fr_FR'),
             en_US:  getHearthstoneMetadaFromLocalStorage('en_US'),
+            totalBattlegroundsCard: getHearthstoneMetadaFromLocalStorage('totalBattlegroundsCard') || 0,
         };
 
         this.hearthstoneMetadataExpires = {
             fr_FR: localStorage.getItem('hsMetadataExpires.fr_FR') || 0,
             en_US: localStorage.getItem('hsMetadataExpires.en_US') || 0,
+            totalBattlegroundsCard: localStorage.getItem('hsMetadataExpires.totalBattlegroundsCard') || 0,
         };
 
         this.searchCache = {};
@@ -33,6 +35,16 @@
 
         this.init();
     }
+
+    Client.prototype.saveMetadataInStorage = function(storageKey, value) {
+        var ONE_HOUR = 60 * 60 * 1000;
+
+        this.hearthstoneMetadata[storageKey] = value;
+        this.hearthstoneMetadataExpires[storageKey] = Date.now() + ONE_HOUR;
+
+        localStorage.setItem('hsMetadata.' + storageKey, JSON.stringify(value));
+        localStorage.setItem('hsMetadataExpires.' + storageKey, this.hearthstoneMetadataExpires[storageKey]);
+    };
 
     Client.prototype.isReady = function() {
         return this.accessToken && this.accessTokenExpires && this.hearthstoneMetadata[this.locale] && this.hearthstoneMetadataExpires[this.locale];
@@ -114,17 +126,23 @@
             };
 
             return that.catchRequestError(fetch(url, requestOptions)).then(function (metadata) {
-                    var ONE_HOUR = 60 * 60 * 1000;
-
-                    that.hearthstoneMetadata[that.locale] = metadata;
-                    that.hearthstoneMetadataExpires[that.locale] = Date.now() + ONE_HOUR;
-
-                    localStorage.setItem('hsMetadata.' + that.locale, JSON.stringify(metadata));
-                    localStorage.setItem('hsMetadataExpires.' + that.locale, that.hearthstoneMetadataExpires[that.locale]);
-
-                    return metadata;
-                });
+                that.saveMetadataInStorage(that.locale, metadata);
+                return metadata;
+            });
         });
+    };
+
+    Client.prototype.fetchTotalBattlegroundsCards = function() {
+        var that = this;
+
+        return that.executeGetCardsRequest().then(function (response) {
+            that.saveMetadataInStorage('totalBattlegroundsCard', response.cardCount);
+            return response.cardCount;
+        });
+    };
+
+    Client.prototype.isBattlegrounds = function() {
+        return this.cardSetGroup === 'battlegrounds';
     };
 
     Client.prototype.executeGetCardsRequest = function (queryParams) {
@@ -138,6 +156,13 @@
                 set: that.cardSetGroup,
                 ...(queryParams || {}),
             };
+
+            if (that.isBattlegrounds()) {
+                finalQueryParams.gameMode = 'battlegrounds';
+                finalQueryParams.type = 'minion';
+                delete finalQueryParams['set'];
+                delete finalQueryParams['collectible'];
+            }
     
             var url = 'https://eu.api.blizzard.com/hearthstone/cards?';
     
@@ -193,7 +218,11 @@
     Client.prototype.fetchRandomCard = function() {
         var that = this;
 
-        return that.getTotalCardsOfCardSetGroup(that.cardSetGroup).then(function (totalOfCards) {     
+        var getTotalOfCards = that.isBattlegrounds()
+            ? that.getTotalBattlegroundsCards()
+            : that.getTotalCardsOfCardSetGroup(that.cardSetGroup);
+
+        return getTotalOfCards.then(function (totalOfCards) {     
             var page = Math.floor(
                 Math.random() * (totalOfCards - 1) + 1
             );
@@ -260,6 +289,14 @@
                 .map(getTotalOfCollectibleCardsFromCardSetSlug)
                 .reduce(sum, 0);
         });
+    };
+
+    Client.prototype.getTotalBattlegroundsCards = function() {
+        if (!this.hearthstoneMetadata.totalBattlegroundsCard || this.hearthstoneMetadataExpires.totalBattlegroundsCard <= Date.now()) {
+            return this.fetchTotalBattlegroundsCards();
+        }
+
+        return Promise.resolve(this.hearthstoneMetadata.totalBattlegroundsCard);
     };
 
     Client.prototype.getRarityName = function(rarityId) {

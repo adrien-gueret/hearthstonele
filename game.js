@@ -23,6 +23,19 @@
 		IMAGE_3: 3,		
     };
 
+    var COMMON_CLUES = [
+        'IMAGE_1', 'IMAGE_2', 'IMAGE_3',
+        'INITIALS', 'CHANGE',
+    ];
+
+    var SPECIFIC_CONSTRUCTED_CLUES = [
+        'RARITY', 'CLASS', 'EXPANSION', 'FLAVOR_TEXT',
+    ];
+
+    var SPECIFIC_BATTLEGROUNDS_CLUES = [
+       
+    ];
+
     function Game(client, onDie) {
         this.client = client;
         this.hp = Game.MAX_HP;
@@ -63,11 +76,15 @@
 		this._nextImageClue = 'IMAGE_1';
     };
 
-	Game.prototype.updateCluesUI = function() {
+	Game.prototype.updateCluesUI = function(isBattlegrounds) {
 		var that = this;
 		var totalButtons = document.querySelectorAll('.heroPowerChoice').length;
-		
-		var cluesToReveal = ['FLAVOR_TEXT', that._nextImageClue, 'RARITY', 'CLASS', 'EXPANSION']
+
+        var usableClues = (isBattlegrounds
+            ? SPECIFIC_BATTLEGROUNDS_CLUES
+            : SPECIFIC_CONSTRUCTED_CLUES).concat(that._nextImageClue);
+
+		var cluesToReveal = usableClues
 			.sort(() => Math.random() - 0.5)
 			.concat('INITIALS', 'CHANGE');
 		
@@ -83,7 +100,7 @@
 		});
 	};
 
-    Game.prototype.useClue = function(clue, preventDamages) {
+    Game.prototype.useClue = function(clue, preventDamages, isBattlegrounds) {
 		var that = this;
 		
         if (that.usedClues.indexOf(clue) !== -1) {
@@ -106,9 +123,13 @@
 			this._nextImageClue = 'IMAGE_3';
 		}
 		
-		this.updateCluesUI();
+		this.updateCluesUI(isBattlegrounds);
+
+        var maxUsableClues = isBattlegrounds
+            ? COMMON_CLUES.concat(SPECIFIC_BATTLEGROUNDS_CLUES).length
+            : COMMON_CLUES.concat(SPECIFIC_CONSTRUCTED_CLUES).length;
 		
-        return that.usedClues.length === Object.keys(CLUES_TO_COST).length;
+        return that.usedClues.length === maxUsableClues;
     };
 
     Game.prototype.checkGuess = function (nameToCheck) {
@@ -116,6 +137,10 @@
     };
 
     Game.getCardCost = function (card) {
+        if ('battlegrounds' in card) {
+            return card.battlegrounds.tier;
+        }
+
         return 'manaCost' in card ? card.manaCost : 0;
     };
 
@@ -134,6 +159,12 @@
     Game.getCardHealth = function (card) {
         return card[Game.getCardHealthType(card)] || 0;
     };
+
+    Game.getCardImageSrc = function (card) {
+        return 'battlegrounds' in card
+            ? card.battlegrounds.image
+            : card.image;
+    }
 
     Game.prototype.checkCardStats = function (cardToCheck) {
         var cardToCheckCost = Game.getCardCost(cardToCheck);

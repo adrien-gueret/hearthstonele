@@ -114,7 +114,7 @@
 		extractCardIllustration: function (card) {	
 			var cardArt = new Image();
 			cardArt.crossOrigin = 'Anonymous';
-			cardArt.src = 'https://www.mariouniversalis.fr/proxy.php?url=' + card.image;
+			cardArt.src = 'https://www.mariouniversalis.fr/proxy.php?url=' + Game.getCardImageSrc(card);
 					
 			return new Promise(function (resolve) {
 				if (!cardArt.complete) {

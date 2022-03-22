@@ -4,7 +4,6 @@
     var submitButton = document.getElementById('submitButton');
     var flavorText = document.getElementById('flavorText');
     var pixelatedIllustration = document.getElementById('pixelatedIllustration');
-    var cardArt = document.getElementById('cardArt');
     var heroPower = document.getElementById('heroPower');
     var tableHistory = document.getElementById('tableHistory');
     var tableHistoryContainer = document.getElementById('tableHistoryContainer');
@@ -12,6 +11,7 @@
     var allClues = document.getElementById('allClues');
     var scoreAnimation = document.getElementById('scoreAnimation');
     var configForm = document.getElementById('configForm');
+    var firstClueFlavorTextContainer = document.getElementById('firstClueFlavorTextContainer');
 	
     var hasStartedGame = false;
 
@@ -72,7 +72,7 @@
         activeConfigNewGameWarning();
 		
         try {
-            hasUsedAllClues = currentGame.useClue(clue, preventClueDamages);
+            hasUsedAllClues = currentGame.useClue(clue, preventClueDamages, client.isBattlegrounds());
         } catch (e) {
             return;
         } finally {
@@ -103,7 +103,7 @@
                 changeCardImageContainer.innerHTML = '';
 
                 var image = new Image();
-                image.src = currentGame.cardToGuess.image;
+                image.src = Game.getCardImageSrc(currentGame.cardToGuess);
                 image.alt = currentGame.cardToGuess.name;
                 
                 changeCardImageContainer.appendChild(image);
@@ -248,7 +248,7 @@
         currentGame.foundCards.forEach(function (card) {
             var image = new Image();
             image.alt = card.name;
-            image.src = card.image;
+            image.src = Game.getCardImageSrc(card);
             imageContainer.appendChild(image);
         });
 
@@ -289,7 +289,7 @@
             'heroPowerChoice1_Description', 'heroPowerChoice2_Description', 'heroPowerChoice3_Description', 'heroPowerChoice4_Description', 'heroPowerChoice5_Description', 'heroPowerChoice6_Description', 'heroPowerChoice7_Description', 'heroPowerChoice8_Description', 'heroPowerChoice9_Description',
             'changeCardTitle', 'newCardButtonChange', 'gameEndTitle', 'gameEndButton',
             'configNewGameButton', 'newGameWarning', 'formConfigLanguage', 'formConfigGameMode',
-            'formConfigWildMode', 'formConfigStandardMode', 'formConfigFirstClue', 'formConfigFlavorText', 'formConfigIllustration', 'formConfigNone',
+            'formConfigWildMode', 'formConfigStandardMode', 'formConfigBattlegroundsMode', 'formConfigFirstClue', 'formConfigFlavorText', 'formConfigIllustration', 'formConfigNone',
 			'configBackButton', 'gameBy',
         ].forEach(function (elementId) {
             var element = document.getElementById(elementId);
@@ -309,9 +309,15 @@
         document.getElementById('sampleStatsAttack').title = translate('statTitle_attack_almost', 4);
         document.getElementById('sampleStatsHealth').title = translate('statTitle_ko', 9);
 		
-		document.getElementById('guessCard').innerHTML = translate('guessCard',
-			translate(client.cardSetGroup === 'wild' ? 'formConfigWildMode' : 'formConfigStandardMode').toLowerCase()
-		);
+        let cardMode = '';
+
+        switch (client.cardSetGroup) {
+            case 'battlegrounds': { cardMode = translate('formConfigBattlegroundsMode'); } break;
+            case 'wild': { cardMode = translate('formConfigWildMode'); } break;
+            default: { cardMode = translate('formConfigStandardMode'); } break;
+        }
+
+		document.getElementById('guessCard').innerHTML = translate('guessCard', cardMode);
     }
 
     function showErrorModal(title, content) {
@@ -423,7 +429,7 @@
                 nameCell.appendChild(nameContainer);
                 
                 var image = new Image();
-                image.src = correspondingCard.image;
+                image.src = Game.getCardImageSrc(correspondingCard);
                 nameCell.appendChild(image);
                 
                 rowFragment.appendChild(nameCell);
@@ -473,7 +479,7 @@
                 successImageContainer.innerHTML = '';
 
                 var successImage = new Image();
-                successImage.src = correspondingCard.image;
+                successImage.src = Game.getCardImageSrc(correspondingCard);
                 successImage.alt = correspondingCard.name;
                 
                 successImageContainer.appendChild(successImage);
@@ -535,12 +541,26 @@
         window.scrollTo(0, 0);
     }
 
+    function updateConfigForm() {
+        firstClueFlavorTextContainer.style.removeProperty('display');
+
+        if (configForm.elements.namedItem('gameMode').value === 'battlegrounds') {
+            firstClueFlavorTextContainer.style.display = 'none';
+
+            if (configForm.elements.namedItem('firstClue').value === 'FLAVOR_TEXT') {
+                configForm.elements.namedItem('firstClue').value = 'IMAGE_1';
+            }
+        }
+    }
+
     function showConfig(idToElementToShow, defaultGameMode) {
         hideUIElements();
 
         configForm.elements.namedItem('language').value = window.currentLocale;
         configForm.elements.namedItem('gameMode').value = defaultGameMode;
         configForm.elements.namedItem('firstClue').value = getDefaultClue();
+
+        updateConfigForm();
 
         document.getElementById(idToElementToShow).style.display = 'block'
         document.getElementById('configModal').style.display = 'flex';
@@ -553,7 +573,7 @@
     
             translateUI(client);
         }
-    
+
         disableConfigNewGameWarning();
 
         document.getElementById('goToRulesButton').onclick = showRules;
@@ -570,6 +590,12 @@
             localStorage.setItem('has_already_played', 1);
             showRules();
         }
+
+        configForm.onchange = function(e) {
+            if (e.target.name === 'gameMode') {
+                updateConfigForm();
+            }
+        };
 
         configForm.onsubmit = function(e) {
             e.preventDefault();
