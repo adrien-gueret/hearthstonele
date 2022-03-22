@@ -248,7 +248,7 @@
             }
     
             function getTotalOfCollectibleCardsFromCardSetSlug(cardSetSlug) {
-                return metadata.sets.find(getCardSetCorrespongingToSlug(cardSetSlug)).collectibleCount;
+                return metadata.sets.find(getCardSetCorrespongingToSlug(cardSetSlug)).collectibleRevealedCount;
             }
     
             function sum(total, num) {
