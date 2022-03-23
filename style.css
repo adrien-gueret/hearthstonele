@@ -575,17 +575,29 @@ td.tableCardName {
     background-color: #fff;
 }
 
-.tableCardStat.cost {
-    background-image: url(./images/mana.png);
+.battlegrounds .tableCardStat.cost { background-image: url(./images/tavern_tiers.png); }
+
+.battlegrounds .tableCardStat.cost.ok, .battlegrounds .tableCardStat.cost.almost, .battlegrounds .tableCardStat.cost.ko {
+    background-size: auto, cover, cover;
+    background-position: left;
+    color: transparent;
+    text-shadow: none;
 }
 
-.tableCardStat.cost.almost {
-    background-image: url(./images/mana.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px);
-}
+.tableCardStat.cost, .tableCardStat.cost { background-image: url(./images/mana.png); }
+.tableCardStat.cost.almost { background-image: url(./images/mana.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px); }
+.tableCardStat.cost.ko { background-image: url(./images/mana.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px); }
 
-.tableCardStat.cost.ko {
-    background-image: url(./images/mana.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px);
-}
+.battlegrounds .tableCardStat.cost.ok { background-image: url(./images/all_tavern_tiers.png); }
+.battlegrounds .tableCardStat.cost.almost { background-image: url(./images/all_tavern_tiers.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px); }
+.battlegrounds .tableCardStat.cost.ko { background-image: url(./images/all_tavern_tiers.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px); }
+
+.battlegrounds .tableCardStat.cost.value-1 { background-position: 0; }
+.battlegrounds .tableCardStat.cost.value-2 { background-position: -68px, 0, 0; }
+.battlegrounds .tableCardStat.cost.value-3 { background-position: -136px, 0, 0; }
+.battlegrounds .tableCardStat.cost.value-4 { background-position: -204px, 0, 0; }
+.battlegrounds .tableCardStat.cost.value-5 { background-position: -272px, 0, 0; }
+.battlegrounds .tableCardStat.cost.value-6 { background-position: -340px, 0, 0; }
 
 .tableCardStat.attack {
     background-image: url(./images/attack.png);
@@ -1057,6 +1069,10 @@ fieldset input:focus + label:before {
 
     .nameContainer {
         background-image: linear-gradient(90deg, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 70%);
+    }
+
+    .battlegrounds .nameContainer {
+        background-image: linear-gradient(90deg, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 70%);
     }
 
     

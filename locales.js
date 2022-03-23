@@ -21,8 +21,10 @@
 				return 'Devinez la carte <b>' + mode + '</b> à trouver&nbsp;!';
 			},
 			tableHistoryName: 'Nom',
-            statTitle_cost_ok: function (value) {
-                return 'Le coût en mana de la carte recherchée est bien de ' + value + '.';
+            statTitle_cost_ok: function (value, isBattlegrounds) {
+                return isBattlegrounds
+                    ? 'Le niveau de taverne de la carte recherchée est bien de ' + value + '.'
+                    : 'Le coût en mana de la carte recherchée est bien de ' + value + '.';
             },
             statTitle_attack_ok: function (value) {
                 return 'L\'attaque de la carte recherchée est bien de ' + value + '.';
@@ -30,8 +32,10 @@
             statTitle_health_ok: function (value) {
                 return 'La vie, la durabilité OU l\'armure de la carte recherchée est bien de ' + value + '.';
             },
-            statTitle_cost_almost: function (value) {
-                return 'Il y a bien un ' + value + ' dans les stats de la carte recherchée, mais ce n\'est pas son coût en mana.';
+            statTitle_cost_almost: function (value, isBattlegrounds) {
+                return isBattlegrounds
+                    ? 'Il y a bien un ' + value + ' dans les stats de la carte recherchée, mais ce n\'est pas son niveau de taverne.'
+                    : 'Il y a bien un ' + value + ' dans les stats de la carte recherchée, mais ce n\'est pas son coût en mana.';
             },
             statTitle_attack_almost: function (value) {
                 return 'Il y a bien un ' + value + ' dans les stats de la carte recherchée, mais ce n\'est pas son attaque.';
@@ -114,8 +118,10 @@
 				return 'Guess the <b>' + mode + '</b> card!';
 			},
 			tableHistoryName: 'Name',
-            statTitle_cost_ok: function (value) {
-                return 'The mana cost of the card to find is indeed ' + value + '.';
+            statTitle_cost_ok: function (value, isBattlegrounds) {
+                return isBattlegrounds
+                    ? 'The tavern tier of the card to find is indeed ' + value + '.'
+                    : 'The mana cost of the card to find is indeed ' + value + '.';
             },
             statTitle_attack_ok: function (value) {
                 return 'The attack of the card to find is indeed ' + value + '.';
@@ -123,8 +129,10 @@
             statTitle_health_ok: function (value) {
                 return 'The health, durability OR armor of the card to find is indeed  ' + value + '.';
             },
-            statTitle_cost_almost: function (value) {
-                return 'There is indeed a ' + value + ' in the stats of the card to find, but it is not its mana cost.';
+            statTitle_cost_almost: function (value, isBattlegrounds) {
+                return isBattlegrounds
+                    ? 'There is indeed a ' + value + ' in the stats of the card to find, but it is not its tavern tier.'
+                    : 'There is indeed a ' + value + ' in the stats of the card to find, but it is not its mana cost.';
             },
             statTitle_attack_almost: function (value) {
                 return 'There is indeed a ' + value + ' in the stats of the card to find, but it is not its attack.';

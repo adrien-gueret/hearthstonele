@@ -23,14 +23,14 @@
 		return ['IMAGE_1', 'FLAVOR_TEXT', 'NONE'].indexOf(storedDefaultClue) === -1 ? 'FLAVOR_TEXT' : storedDefaultClue;
 	}
 
-    function getStatTitle(statType, value, status) {
+    function getStatTitle(statType, value, status, isBattlegrounds) {
         switch (status) {
             case 'ok':
-                return translate('statTitle_' + statType + '_ok', value);
+                return translate('statTitle_' + statType + '_ok', value, isBattlegrounds);
             break;
 
             case 'almost':
-                return translate('statTitle_' + statType + '_almost', value);
+                return translate('statTitle_' + statType + '_almost', value, isBattlegrounds);
             break;
 
             case 'ko':
@@ -437,9 +437,9 @@
                 // Cost cell
                 var costCell = document.createElement('td');
                 var cost = Game.getCardCost(correspondingCard);
-                costCell.className = 'tableCardStat cost hearthstoneText ' + cardStatsStatus.cost;
+                costCell.className = 'tableCardStat cost hearthstoneText ' + cardStatsStatus.cost + ' value-' + cost;
                 costCell.appendChild(document.createTextNode(cost));
-                costCell.title = getStatTitle('cost', cost, cardStatsStatus.cost);
+                costCell.title = getStatTitle('cost', cost, cardStatsStatus.cost, client.isBattlegrounds());
                 rowFragment.appendChild(costCell);
 
                 // Attack cell
