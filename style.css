@@ -775,8 +775,7 @@ td.tableCardName {
     justify-content: flex-end;
     width: 370px;
     height: 543px;
-    background-image: url('./images/hero_power_choices.png');
-    background-repeat: no-repeat;
+    position: relative;
     transform: scale(.75);
     border: 0;
     background-color: transparent;
@@ -785,6 +784,32 @@ td.tableCardName {
     flex-shrink: 0;
     margin-right: -64px;
     position: relative;
+}
+
+.heroPowerChoice::before {
+    display: block;
+    content: '';
+    background-image: url('./images/hero_power_images.png');
+    width: 280px;
+    height: 210px;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: -1;
+    left: 55px;
+    top: 65px;
+}
+
+.heroPowerChoice::after {
+    display: block;
+    content: '';
+    width: 370px;
+    height: 543px;
+    background-image: url('./images/hero_power_card.png');
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
 }
 
 .heroPowerChoice .hearthstoneTitle {
@@ -801,40 +826,40 @@ td.tableCardName {
     left: 30px;
 }
 
-#heroPowerRarity {
-	 background-position: 0px;
+#heroPowerRarity::before {
+    background-position: 0px;
 }
 
-#heroPowerClass {
-    background-position: -370px;
+#heroPowerClass::before {
+    background-position: -280px;
 }
 
-#heroPowerExpansion {
-    background-position: -740px;
+#heroPowerExpansion::before {
+    background-position: -560px;
 }
 
-#heroPowerInitials {
-    background-position: -1110px;
+#heroPowerInitials::before {
+    background-position: -840px;
 }
 
-#heroPowerChange {
-    background-position: -1480px;
+#heroPowerChange::before {
+    background-position: -1120px;
 }
 
-#heroPowerFlavorText {
-    background-position: -1850px;
+#heroPowerFlavorText::before {
+    background-position: -1400px;
 }
 
-#heroPowerImage1 {
-	background-position: -2220px;
+#heroPowerImage1::before {
+	background-position: -1680px;
 }
 
-#heroPowerImage2 {
-	background-position: -2590px;
+#heroPowerImage2::before {
+	background-position: -1960px;
 }
 
-#heroPowerImage3 {
-	background-position: -2960px;
+#heroPowerImage3::before {
+	background-position: -2240px;
 }
 
 #allClues {
