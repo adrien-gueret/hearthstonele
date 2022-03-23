@@ -794,7 +794,7 @@ td.tableCardName {
     height: 210px;
     background-repeat: no-repeat;
     position: absolute;
-    z-index: -1;
+    z-index: -2;
     left: 55px;
     top: 65px;
 }
@@ -830,7 +830,7 @@ td.tableCardName {
     background-position: 0px;
 }
 
-#heroPowerClass::before {
+#heroPowerClass::before, #heroPowerType::before {
     background-position: -280px;
 }
 
@@ -890,10 +890,14 @@ td.tableCardName {
     height: 39px;
 }
 
-.clueIcon.class {
+.clueIcon.class, .clueIcon.type {
     width: 39px;
     height: 39px;
     background-position: 0 -39px;
+}
+
+.clueIcon.type {
+    background-position: 0 -78px;
 }
 
 .clueIcon.class.mage {
@@ -934,6 +938,50 @@ td.tableCardName {
 
 .clueIcon.class.paladin {
     background-position: -234px -39px;
+}
+
+.clueIcon.type.beast {
+    background-position: 0 -78px;
+}
+
+.clueIcon.type.demon {
+    background-position: -39px -78px;
+}
+
+.clueIcon.type.dragon {
+    background-position: -78px -78px;
+}
+
+.clueIcon.type.elemental {
+    background-position: -117px -78px;
+}
+
+.clueIcon.type.mech {
+    background-position: -156px -78px;
+}
+
+.clueIcon.type.pirate {
+    background-position: -195px -78px;
+}
+
+.clueIcon.type.murloc {
+    background-position: -234px -78px;
+}
+
+.clueIcon.type.quilboar {
+    background-position: 0px -117px;
+}
+
+.clueIcon.type.naga {
+    background-position: -39px -117px;
+}
+
+.clueIcon.type.all {
+    background-position: -78px -117px;
+}
+
+.clueIcon.type.typeless {
+    background-position: -117px -117px;
 }
 
 #gameEndCards img {

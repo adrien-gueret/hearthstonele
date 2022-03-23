@@ -309,6 +309,16 @@
         });
     };
 
+    Client.prototype.getMinionType = function(minionTypeId) {
+        return this.getMetadata().then(function(metadata) {
+            var correspondingType = metadata.minionTypes.find(function (minionType) {
+                return minionType.id === minionTypeId;
+            });
+
+            return correspondingType ? correspondingType : null;
+        });
+    };
+
     Client.prototype.getClass = function(classId) {
         return this.getMetadata().then(function(metadata) {
             return metadata.classes.find(function(classToCheck) {

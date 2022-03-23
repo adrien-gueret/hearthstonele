@@ -206,6 +206,31 @@
 				});
 			break;
 
+            case 'TYPE':
+                client.getMinionType(currentGame.cardToGuess.minionTypeId).then(function(minionType) {
+                    var minionTypeName = translate('typeless');
+                    var minionTypeSlug = 'typeless';
+
+                    if (minionType) {
+                        minionTypeName = minionType.name;
+                        minionTypeSlug = minionType.slug;
+                    }
+
+                    var clue = document.createElement('span');
+                    clue.className = 'clue';
+
+                    var icon = document.createElement('span');
+                    icon.className = 'clueIcon type ' + minionTypeSlug;
+                    clue.appendChild(icon);
+
+                    var minionType = document.createElement('b');
+                    minionType.appendChild(document.createTextNode(minionTypeName));
+                    clue.appendChild(minionType);
+
+                    allClues.appendChild(clue);
+                });
+            break;
+
             default: return;
         }
     }
@@ -503,6 +528,7 @@
         document.getElementById('heroPowerImage1').onclick = () => useClue('IMAGE_1', client);
         document.getElementById('heroPowerImage2').onclick = () => useClue('IMAGE_2', client);
         document.getElementById('heroPowerImage3').onclick = () => useClue('IMAGE_3', client);
+        document.getElementById('heroPowerType').onclick = () => useClue('TYPE', client);
 
         document.getElementById('cancelHeroPowerButton').onclick = () => closeHeroPowerModal();
 
