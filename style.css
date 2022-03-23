@@ -575,20 +575,19 @@ td.tableCardName {
     background-color: #fff;
 }
 
-.battlegrounds .tableCardStat.cost { background-image: url(./images/tavern_tiers.png); }
+.battlegrounds .tableCardStat.cost:not(.force-mana) { background-image: url(./images/tavern_tiers.png); }
 
-.battlegrounds .tableCardStat.cost.ok, .battlegrounds .tableCardStat.cost.almost, .battlegrounds .tableCardStat.cost.ko {
+.battlegrounds .tableCardStat.cost.ok:not(.force-mana), .battlegrounds .tableCardStat.cost.almost, .battlegrounds .tableCardStat.cost.ko {
     background-size: auto, cover, cover;
-    background-position: left;
     color: transparent;
     text-shadow: none;
 }
 
-.tableCardStat.cost, .tableCardStat.cost { background-image: url(./images/mana.png); }
+.tableCardStat.cost { background-image: url(./images/mana.png); }
 .tableCardStat.cost.almost { background-image: url(./images/mana.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px); }
 .tableCardStat.cost.ko { background-image: url(./images/mana.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px); }
 
-.battlegrounds .tableCardStat.cost.ok { background-image: url(./images/all_tavern_tiers.png); }
+.battlegrounds .tableCardStat.cost.ok:not(.force-mana) { background-image: url(./images/all_tavern_tiers.png); }
 .battlegrounds .tableCardStat.cost.almost { background-image: url(./images/all_tavern_tiers.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px); }
 .battlegrounds .tableCardStat.cost.ko { background-image: url(./images/all_tavern_tiers.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px); }
 
