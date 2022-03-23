@@ -84,6 +84,28 @@
 				flavorText.innerHTML = currentGame.cardToGuess.flavorText;
 				flavorText.style.display = 'block';
 			break;
+
+            case 'TEXT':
+                var tempSpan = document.createElement('span');
+                tempSpan.innerHTML = currentGame.cardToGuess.text;
+                
+                var cleanText = tempSpan.textContent
+                    .toLocaleLowerCase()
+                    .replace(/\((\S+?),(\S+?)\)/g, '$1')
+                    .replace(/\((.+?)\)/g, '$1')
+                    .replace(/\./g, '');
+
+                var shuffle = () => Math.random() - 0.5;
+
+                var words = cleanText.split(' ');
+                var reorderedWords = words.sort(shuffle);
+                var shuffledWords = reorderedWords.map((word) => word.split('').sort(shuffle).join(''));
+
+                var finalText = shuffledWords.join(' ');
+
+				flavorText.innerHTML = finalText[0].toUpperCase() + finalText.substring(1) + '.';
+				flavorText.style.display = 'block';
+			break;
 			
             case 'INITIALS':
                 var censuredName = currentGame.cardToGuess
@@ -310,8 +332,8 @@
             'howManyCanYouGuess', 'submitButton',
             'roundSuccessTitle', 'errorModalButton', 'hasBeenRestored', 'cancelHeroPowerButton',
             'heroPowerDetailsTitle', 'heroPowerDetailsDescription',
-            'heroPowerChoice1_Title', 'heroPowerChoice2_Title', 'heroPowerChoice3_Title', 'heroPowerChoice4_Title', 'heroPowerChoice5_Title', 'heroPowerChoice6_Title', 'heroPowerChoice7_Title', 'heroPowerChoice8_Title', 'heroPowerChoice9_Title',
-            'heroPowerChoice1_Description', 'heroPowerChoice2_Description', 'heroPowerChoice3_Description', 'heroPowerChoice4_Description', 'heroPowerChoice5_Description', 'heroPowerChoice6_Description', 'heroPowerChoice7_Description', 'heroPowerChoice8_Description', 'heroPowerChoice9_Description',
+            'heroPowerChoice1_Title', 'heroPowerChoice2_Title', 'heroPowerChoice3_Title', 'heroPowerChoice4_Title', 'heroPowerChoice5_Title', 'heroPowerChoice6_Title', 'heroPowerChoice7_Title', 'heroPowerChoice8_Title', 'heroPowerChoice9_Title', 'heroPowerChoice10_Title', 'heroPowerChoice11_Title',
+            'heroPowerChoice1_Description', 'heroPowerChoice2_Description', 'heroPowerChoice3_Description', 'heroPowerChoice4_Description', 'heroPowerChoice5_Description', 'heroPowerChoice6_Description', 'heroPowerChoice7_Description', 'heroPowerChoice8_Description', 'heroPowerChoice9_Description', 'heroPowerChoice10_Description', 'heroPowerChoice11_Description',
             'changeCardTitle', 'newCardButtonChange', 'gameEndTitle', 'gameEndButton',
             'configNewGameButton', 'newGameWarning', 'formConfigLanguage', 'formConfigGameMode',
             'formConfigWildMode', 'formConfigStandardMode', 'formConfigBattlegroundsMode', 'formConfigFirstClue', 'formConfigFlavorText', 'formConfigIllustration', 'formConfigNone',
@@ -529,6 +551,7 @@
         document.getElementById('heroPowerImage2').onclick = () => useClue('IMAGE_2', client);
         document.getElementById('heroPowerImage3').onclick = () => useClue('IMAGE_3', client);
         document.getElementById('heroPowerType').onclick = () => useClue('TYPE', client);
+        document.getElementById('heroPowerText').onclick = () => useClue('TEXT', client);
 
         document.getElementById('cancelHeroPowerButton').onclick = () => closeHeroPowerModal();
 

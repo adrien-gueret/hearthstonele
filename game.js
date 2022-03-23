@@ -7,6 +7,7 @@
         CHANGE: document.getElementById('heroPowerChange'),
         FLAVOR_TEXT: document.getElementById('heroPowerFlavorText'),
         TYPE: document.getElementById('heroPowerType'),
+        TEXT: document.getElementById('heroPowerText'),
         IMAGE_1: document.getElementById('heroPowerImage1'),
         IMAGE_2: document.getElementById('heroPowerImage2'),
 		IMAGE_3: document.getElementById('heroPowerImage3'),
@@ -20,6 +21,7 @@
         CHANGE: 1,
 		FLAVOR_TEXT: 1,
         TYPE: 2,
+        TEXT: 2,
 		IMAGE_1: 1,
 		IMAGE_2: 2,
 		IMAGE_3: 3,		
@@ -31,11 +33,11 @@
     ];
 
     var SPECIFIC_CONSTRUCTED_CLUES = [
-        'RARITY', 'CLASS', 'EXPANSION', 'FLAVOR_TEXT',
+        'CLASS', 'FLAVOR_TEXT', 'RARITY', 'EXPANSION',
     ];
 
     var SPECIFIC_BATTLEGROUNDS_CLUES = [
-       'TYPE',
+       'TYPE', 'TEXT',
     ];
 
     function Game(client, onDie) {

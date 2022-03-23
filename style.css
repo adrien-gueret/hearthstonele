@@ -862,6 +862,10 @@ td.tableCardName {
 	background-position: -2240px;
 }
 
+#heroPowerText::before {
+	background-position: -2520px;
+}
+
 #allClues {
     text-align: center;
     margin-bottom: 8px;
