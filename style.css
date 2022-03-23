@@ -881,7 +881,7 @@ td.tableCardName {
     display: inline-block;
     background-repeat: no-repeat;
     margin: 0 4px 0 8px;
-    background-image: url(./images/clue_icons.png);
+    background-image: url(./images/clue_icons.png?v2);
 }
 
 .clueIcon.rarity {
