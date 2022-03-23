@@ -488,6 +488,7 @@ body.battlegrounds::before {
     font-size: 1.5rem;
     line-height: 1em;
     text-align: center;
+    color: #000;
 }
 
 #heroPower:not(.used):hover + #heroPowerDetails, #heroPower:not(.used):focus + #heroPowerDetails {
