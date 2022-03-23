@@ -232,7 +232,7 @@
 			if (defaultClue && defaultClue !== 'NONE') {
 				useClue(defaultClue, client, preventClueDamages);
 			} else {
-				currentGame.updateCluesUI();
+				currentGame.updateCluesUI(client.isBattlegrounds());
 			}
 			
             searchInput.disabled = false;
