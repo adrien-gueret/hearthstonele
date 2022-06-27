@@ -1,4 +1,8 @@
 (function(window) {
+    var HEARTHSTONE_CARD_TYPE_IDS = {
+        LOCATION: 39,
+    };
+
     var CLUES_TO_ELEMENT = {
         RARITY: document.getElementById('heroPowerRarity'),
         CLASS: document.getElementById('heroPowerClass'),
@@ -153,15 +157,17 @@
     };
 
     Game.getCardHealthType = function (card) {
-        return 'armor' in card ? 'armor' : (
+        const healthType = 'armor' in card ? 'armor' : (
             'durability' in card ? 'durability' : (
                 'health' in card ? 'health' : 'none'
             )
         );
+
+        return healthType === 'health' && card.cardTypeId === HEARTHSTONE_CARD_TYPE_IDS.LOCATION ? 'durability' : healthType;
     };
 
     Game.getCardHealth = function (card) {
-        return card[Game.getCardHealthType(card)] || 0;
+        return card[Game.getCardHealthType(card)] || card.health || 0;
     };
 
     Game.getCardImageSrc = function (card) {
