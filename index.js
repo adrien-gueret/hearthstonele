@@ -496,7 +496,7 @@
                 var attackClassName = 'none';
                 
                 if ('attack' in correspondingCard) {
-                    attackClassName = correspondingCard.cardTypeId === 7 ? 'attack_weapon' : 'attack';
+                    attackClassName = correspondingCard.cardTypeId === HEARTHSTONE_CARD_TYPE_IDS.WEAPON ? 'attack_weapon' : 'attack';
                 }
 
                 attackCell.className = 'tableCardStat ' + attackClassName + ' hearthstoneText ' + cardStatsStatus.attack;

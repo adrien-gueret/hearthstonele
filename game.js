@@ -1,8 +1,4 @@
 (function(window) {
-    var HEARTHSTONE_CARD_TYPE_IDS = {
-        LOCATION: 39,
-    };
-
     var CLUES_TO_ELEMENT = {
         RARITY: document.getElementById('heroPowerRarity'),
         CLASS: document.getElementById('heroPowerClass'),

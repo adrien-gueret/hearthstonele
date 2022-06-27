@@ -1,4 +1,15 @@
+var HEARTHSTONE_CARD_TYPE_IDS = {
+    HERO: 3,
+    MINION: 4,
+    SPELL: 5,
+    WEAPON: 7,
+    LOCATION: 39,
+};
+
 (function(window) {
+    const checkLastExpansion = false;
+    const lastExpansioName = 'murder-at-castle-nathria';
+
     function getHearthstoneMetadaFromLocalStorage(locale) {
         try {
             return JSON.parse(localStorage.getItem('hsMetadata.' + locale));
@@ -149,7 +160,10 @@
         var that = this;
 
         return that.checkAccessTokenExpiration().then(function() {
-            var finalQueryParams = {
+            var finalQueryParams = checkLastExpansion ? {
+                locale: that.locale,
+                set: lastExpansioName,
+            } : {
                 locale: that.locale,
                 gameMode: 'constructed',
                 collectible: 1,

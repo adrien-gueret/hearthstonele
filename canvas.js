@@ -11,9 +11,9 @@
 		
 		var deltaX = 0;
 		var deltaY = 0;
-		
+
 		switch (cardTypeId) {
-			case 3: // Hero
+			case HEARTHSTONE_CARD_TYPE_IDS.HERO:
 				canvas.width = 180;
 				canvas.height = 194;
 				
@@ -27,7 +27,7 @@
 				ctx.lineTo(180, 194);
 			break;
 			
-			case 4: // Minion
+			case HEARTHSTONE_CARD_TYPE_IDS.MINION:
 				canvas.width = 192;
 				canvas.height = 210;
 				deltaX = 84;
@@ -37,7 +37,7 @@
 				ctx.ellipse(96, 130, 95, 130, 0, 0, 2 * Math.PI);
 			break;
 			
-			case 5: // Spell
+			case HEARTHSTONE_CARD_TYPE_IDS.SPELL:
 				canvas.width = 244;
 				canvas.height = 169;
 				deltaX = 55;
@@ -50,7 +50,7 @@
 				ctx.lineTo(244, 169);
 			break;
 			
-			case 7: // Weapon
+			case HEARTHSTONE_CARD_TYPE_IDS.WEAPON:
 				canvas.width = 213;
 				canvas.height = 190;
 				
@@ -59,6 +59,16 @@
 				
 				ctx.beginPath();
 				ctx.ellipse(106, 106, 105, 105, 0, 0, 2 * Math.PI);
+			break;
+
+			case HEARTHSTONE_CARD_TYPE_IDS.LOCATION:
+				canvas.width = 192;
+				canvas.height = 210;
+				deltaX = 84;
+				deltaY = 50;
+				
+				ctx.beginPath();
+				ctx.ellipse(96, 130, 95, 130, 0, 0, 2 * Math.PI);
 			break;
 		}
 		
