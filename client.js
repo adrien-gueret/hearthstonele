@@ -156,6 +156,10 @@ var HEARTHSTONE_CARD_TYPE_IDS = {
         return this.cardSetGroup === 'battlegrounds';
     };
 
+    Client.prototype.isClassic = function() {
+        return this.cardSetGroup === 'classic';
+    };
+
     Client.prototype.executeGetCardsRequest = function (queryParams) {
         var that = this;
 
@@ -176,6 +180,8 @@ var HEARTHSTONE_CARD_TYPE_IDS = {
                 finalQueryParams.type = 'minion';
                 delete finalQueryParams['set'];
                 delete finalQueryParams['collectible'];
+            } else if (that.isClassic()) {
+                finalQueryParams.set = 'classic-cards';
             }
     
             var url = 'https://eu.api.blizzard.com/hearthstone/cards?';

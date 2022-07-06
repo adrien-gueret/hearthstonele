@@ -328,11 +328,21 @@ body.battlegrounds::before {
     display: none;
 }
 
-.battlegrounds .bob-normal {
+.bob-classic {
+    display: none;
+}
+
+
+.battlegrounds .bob-normal,
+.classic .bob-normal {
     display: none;
 }
 
 .battlegrounds .bob-battlegrounds {
+    display: inline;
+}
+
+.classic .bob-classic {
     display: inline;
 }
 
