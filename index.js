@@ -72,7 +72,7 @@
         activeConfigNewGameWarning();
 		
         try {
-            hasUsedAllClues = currentGame.useClue(clue, preventClueDamages, client.isBattlegrounds());
+            hasUsedAllClues = currentGame.useClue(clue, preventClueDamages, client.cardSetGroup);
         } catch (e) {
             return;
         } finally {
@@ -279,7 +279,7 @@
 			if (defaultClue && defaultClue !== 'NONE') {
 				useClue(defaultClue, client, preventClueDamages);
 			} else {
-				currentGame.updateCluesUI(client.isBattlegrounds());
+				currentGame.updateCluesUI(client.cardSetGroup);
 			}
 			
             searchInput.disabled = false;

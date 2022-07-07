@@ -27,18 +27,16 @@
 		IMAGE_3: 3,		
     };
 
-    var COMMON_CLUES = [
-        'IMAGE_1', 'IMAGE_2', 'IMAGE_3',
-        'INITIALS', 'CHANGE',
-    ];
-
-    var SPECIFIC_CONSTRUCTED_CLUES = [
-        'CLASS', 'FLAVOR_TEXT', 'RARITY', 'EXPANSION',
-    ];
-
-    var SPECIFIC_BATTLEGROUNDS_CLUES = [
-       'TYPE', 'TEXT',
-    ];
+    var CLUES = {
+        common: [
+            'IMAGE_1', 'IMAGE_2', 'IMAGE_3',
+            'INITIALS', 'CHANGE',
+        ],
+        standard: ['CLASS', 'FLAVOR_TEXT', 'RARITY', 'EXPANSION'],
+        wild: ['CLASS', 'FLAVOR_TEXT', 'RARITY', 'EXPANSION'],
+        classic: ['CLASS', 'FLAVOR_TEXT', 'RARITY'],
+        battlegrounds: ['TYPE', 'TEXT'],
+    };
 
     function Game(client, onDie) {
         this.client = client;
@@ -80,13 +78,11 @@
 		this._nextImageClue = 'IMAGE_1';
     };
 
-	Game.prototype.updateCluesUI = function(isBattlegrounds) {
+	Game.prototype.updateCluesUI = function(gameType) {
 		var that = this;
 		var totalButtons = document.querySelectorAll('.heroPowerChoice').length;
 
-        var usableClues = (isBattlegrounds
-            ? SPECIFIC_BATTLEGROUNDS_CLUES
-            : SPECIFIC_CONSTRUCTED_CLUES).concat(that._nextImageClue);
+        var usableClues = (CLUES[gameType]).concat(that._nextImageClue);
 
 		var cluesToReveal = usableClues
 			.sort(() => Math.random() - 0.5)
@@ -104,7 +100,7 @@
 		});
 	};
 
-    Game.prototype.useClue = function(clue, preventDamages, isBattlegrounds) {
+    Game.prototype.useClue = function(clue, preventDamages, gameType) {
 		var that = this;
 		
         if (that.usedClues.indexOf(clue) !== -1) {
@@ -127,11 +123,9 @@
 			this._nextImageClue = 'IMAGE_3';
 		}
 		
-		this.updateCluesUI(isBattlegrounds);
+		this.updateCluesUI(gameType);
 
-        var maxUsableClues = isBattlegrounds
-            ? COMMON_CLUES.concat(SPECIFIC_BATTLEGROUNDS_CLUES).length
-            : COMMON_CLUES.concat(SPECIFIC_CONSTRUCTED_CLUES).length;
+        var maxUsableClues = CLUES.common.concat(CLUES[gameType]).length;
 		
         return that.usedClues.length === maxUsableClues;
     };
