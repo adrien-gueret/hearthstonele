@@ -336,7 +336,7 @@
             'heroPowerChoice1_Description', 'heroPowerChoice2_Description', 'heroPowerChoice3_Description', 'heroPowerChoice4_Description', 'heroPowerChoice5_Description', 'heroPowerChoice6_Description', 'heroPowerChoice7_Description', 'heroPowerChoice8_Description', 'heroPowerChoice9_Description', 'heroPowerChoice10_Description', 'heroPowerChoice11_Description',
             'changeCardTitle', 'newCardButtonChange', 'gameEndTitle', 'gameEndButton',
             'configNewGameButton', 'newGameWarning', 'formConfigLanguage', 'formConfigGameMode',
-            'formConfigWildMode', 'formConfigStandardMode', 'formConfigClassicMode', 'formConfigBattlegroundsMode', 'formConfigFirstClue', 'formConfigFlavorText', 'formConfigIllustration', 'formConfigNone',
+            'formConfigWildMode', 'formConfigStandardMode', 'formConfigClassicMode', 'formConfigArenaMode', 'formConfigBattlegroundsMode', 'formConfigFirstClue', 'formConfigFlavorText', 'formConfigIllustration', 'formConfigNone',
 			'configBackButton', 'gameBy',
         ].forEach(function (elementId) {
             var element = document.getElementById(elementId);
@@ -362,6 +362,7 @@
             case 'battlegrounds': { cardMode = translate('formConfigBattlegroundsMode'); } break;
             case 'wild': { cardMode = translate('formConfigWildMode'); } break;
             case 'classic': { cardMode = translate('formConfigClassicMode'); } break;
+            case 'arena': { cardMode = translate('formConfigArenaMode'); } break;
             default: { cardMode = translate('formConfigStandardMode'); } break;
         }
 

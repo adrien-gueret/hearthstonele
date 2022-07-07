@@ -33,6 +33,7 @@
             'INITIALS', 'CHANGE',
         ],
         standard: ['CLASS', 'FLAVOR_TEXT', 'RARITY', 'EXPANSION'],
+        arena: ['CLASS', 'FLAVOR_TEXT', 'RARITY', 'EXPANSION'],
         wild: ['CLASS', 'FLAVOR_TEXT', 'RARITY', 'EXPANSION'],
         classic: ['CLASS', 'FLAVOR_TEXT', 'RARITY'],
         battlegrounds: ['TYPE', 'TEXT'],

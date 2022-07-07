@@ -332,9 +332,13 @@ body.battlegrounds::before {
     display: none;
 }
 
+.bob-arena {
+    display: none;
+}
 
 .battlegrounds .bob-normal,
-.classic .bob-normal {
+.classic .bob-normal,
+.arena .bob-normal {
     display: none;
 }
 
@@ -343,6 +347,10 @@ body.battlegrounds::before {
 }
 
 .classic .bob-classic {
+    display: inline;
+}
+
+.arena .bob-arena {
     display: inline;
 }
 

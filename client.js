@@ -147,13 +147,26 @@ var HEARTHSTONE_CARD_TYPE_IDS = {
         var that = this;
 
         return that.executeGetCardsRequest().then(function (response) {
-            that.saveMetadataInStorage('totalBattlegroundsCard', response.cardCount);
+            that.saveMetadataInStorage('totalBattlegroundsCards', response.cardCount);
+            return response.cardCount;
+        });
+    };
+
+    Client.prototype.fetchTotalArenaCards = function() {
+        var that = this;
+
+        return that.executeGetCardsRequest().then(function (response) {
+            that.saveMetadataInStorage('totalArenaCards', response.cardCount);
             return response.cardCount;
         });
     };
 
     Client.prototype.isBattlegrounds = function() {
         return this.cardSetGroup === 'battlegrounds';
+    };
+
+    Client.prototype.isArena = function() {
+        return this.cardSetGroup === 'arena';
     };
 
     Client.prototype.isClassic = function() {
@@ -178,6 +191,10 @@ var HEARTHSTONE_CARD_TYPE_IDS = {
             if (that.isBattlegrounds()) {
                 finalQueryParams.gameMode = 'battlegrounds';
                 finalQueryParams.type = 'minion';
+                delete finalQueryParams['set'];
+                delete finalQueryParams['collectible'];
+            } else if (that.isArena()) {
+                finalQueryParams.gameMode = 'arena';
                 delete finalQueryParams['set'];
                 delete finalQueryParams['collectible'];
             } else if (that.isClassic()) {
@@ -240,7 +257,9 @@ var HEARTHSTONE_CARD_TYPE_IDS = {
 
         var getTotalOfCards = that.isBattlegrounds()
             ? that.getTotalBattlegroundsCards()
-            : that.getTotalCardsOfCardSetGroup(that.cardSetGroup);
+            : (
+               that.isArena() ? that.getTotalArenasCards() : that.getTotalCardsOfCardSetGroup(that.cardSetGroup)
+            );
 
         return getTotalOfCards.then(function (totalOfCards) {     
             var page = Math.floor(
@@ -312,8 +331,16 @@ var HEARTHSTONE_CARD_TYPE_IDS = {
     };
 
     Client.prototype.getTotalBattlegroundsCards = function() {
-        if (!this.hearthstoneMetadata.totalBattlegroundsCard || this.hearthstoneMetadataExpires.totalBattlegroundsCard <= Date.now()) {
+        if (!this.hearthstoneMetadata.totalBattlegroundsCards || this.hearthstoneMetadataExpires.totalBattlegroundsCards <= Date.now()) {
             return this.fetchTotalBattlegroundsCards();
+        }
+
+        return Promise.resolve(this.hearthstoneMetadata.totalBattlegroundsCard);
+    };
+
+    Client.prototype.getTotalArenasCards = function() {
+        if (!this.hearthstoneMetadata.totalArenaCards || this.hearthstoneMetadataExpires.totalArenaCards <= Date.now()) {
+            return this.fetchTotalArenaCards();
         }
 
         return Promise.resolve(this.hearthstoneMetadata.totalBattlegroundsCard);
