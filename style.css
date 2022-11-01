@@ -900,7 +900,7 @@ td.tableCardName {
     display: inline-block;
     background-repeat: no-repeat;
     margin: 0 4px 0 8px;
-    background-image: url(./images/clue_icons.png?v2);
+    background-image: url(./images/clue_icons.png?v3);
 }
 
 .clueIcon.rarity {
@@ -933,6 +933,10 @@ td.tableCardName {
 
 .clueIcon.class.hunter {
     background-position: -253px 0;
+}
+
+.clueIcon.class.deathknight {
+    background-position: -292px 0;
 }
 
 .clueIcon.class.warrior {
@@ -997,6 +1001,10 @@ td.tableCardName {
 
 .clueIcon.type.all {
     background-position: -78px -117px;
+}
+
+.clueIcon.type.undead {
+    background-position: -117px -117px;
 }
 
 .clueIcon.type.typeless {
