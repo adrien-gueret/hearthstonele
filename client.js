@@ -7,8 +7,7 @@ var HEARTHSTONE_CARD_TYPE_IDS = {
 };
 
 (function(window) {
-    const checkLastExpansion = false;
-    const lastExpansioName = 'murder-at-castle-nathria';
+    let lastExpansioName = null;
 
     function getHearthstoneMetadaFromLocalStorage(locale) {
         try {
@@ -173,14 +172,47 @@ var HEARTHSTONE_CARD_TYPE_IDS = {
         return this.cardSetGroup === 'classic';
     };
 
+    Client.prototype.isLastExpansion = function() {
+        return this.cardSetGroup === 'lastExpansion';
+    };
+
     Client.prototype.executeGetCardsRequest = function (queryParams) {
         var that = this;
 
+        function executeRequest(finalQueryParams) {
+            var url = 'https://eu.api.blizzard.com/hearthstone/cards?';
+    
+            url += Object.keys(finalQueryParams).map(function(paramName) {
+                var paramValue = finalQueryParams[paramName];
+                return paramName + '=' + paramValue;
+            }).join('&');
+    
+            var requestHeaders = new Headers({
+                Authorization: 'Bearer ' + that.accessToken,
+            });
+    
+            var requestOptions = {
+                method: 'GET',
+                headers: requestHeaders,
+            };
+    
+            return that.catchRequestError(fetch(url, requestOptions));
+        }
+
         return that.checkAccessTokenExpiration().then(function() {
-            var finalQueryParams = checkLastExpansion ? {
-                locale: that.locale,
-                set: lastExpansioName,
-            } : {
+            if (that.isLastExpansion()) {
+                return that.getLastExpansionData().then(function(lastExpansionData) {
+                    var finalQueryParams = {
+                        locale: that.locale,
+                        set: lastExpansionData.slug,
+                        ...(queryParams || {}),
+                    };
+
+                    return executeRequest(finalQueryParams);
+                });
+            }
+
+            var finalQueryParams = {
                 locale: that.locale,
                 gameMode: 'constructed',
                 collectible: 1,
@@ -201,23 +233,7 @@ var HEARTHSTONE_CARD_TYPE_IDS = {
                 finalQueryParams.set = 'classic-cards';
             }
     
-            var url = 'https://eu.api.blizzard.com/hearthstone/cards?';
-    
-            url += Object.keys(finalQueryParams).map(function(paramName) {
-                var paramValue = finalQueryParams[paramName];
-                return paramName + '=' + paramValue;
-            }).join('&');
-    
-            var requestHeaders = new Headers({
-                Authorization: 'Bearer ' + that.accessToken,
-            });
-    
-            var requestOptions = {
-                method: 'GET',
-                headers: requestHeaders,
-            };
-    
-            return that.catchRequestError(fetch(url, requestOptions));
+            return executeRequest(finalQueryParams);
         });
     };
 
@@ -254,12 +270,25 @@ var HEARTHSTONE_CARD_TYPE_IDS = {
     
     Client.prototype.fetchRandomCard = function() {
         var that = this;
+        var getTotalOfCards = null;
+        
+        switch (true) {
+            case that.isBattlegrounds(): 
+                getTotalOfCards = that.getTotalBattlegroundsCards();
+            break;
 
-        var getTotalOfCards = that.isBattlegrounds()
-            ? that.getTotalBattlegroundsCards()
-            : (
-               that.isArena() ? that.getTotalArenasCards() : that.getTotalCardsOfCardSetGroup(that.cardSetGroup)
-            );
+            case that.isArena():
+                getTotalOfCards = that.getTotalArenasCards();
+            break;
+
+            case that.isLastExpansion():
+                getTotalOfCards = that.getLastExpansionCardCount();
+            break;
+
+            default:
+                getTotalOfCards = that.getTotalCardsOfCardSetGroup(that.cardSetGroup);
+            break;
+        }
 
         return getTotalOfCards.then(function (totalOfCards) {     
             var page = Math.floor(
@@ -383,6 +412,20 @@ var HEARTHSTONE_CARD_TYPE_IDS = {
             });
 
             return correspondingSet || {};
+        });
+    };
+
+    Client.prototype.getLastExpansionData = function() {
+        return this.getMetadata().then(function(metadata) {
+            return metadata.sets.find(function(setToCheck) {
+                return setToCheck.type === 'expansion' || setToCheck.type === 'adventure';
+            });
+        });
+    };
+
+    Client.prototype.getLastExpansionCardCount = function() {
+        return this.getLastExpansionData().then(function(expansionData) {
+            return expansionData.collectibleRevealedCount;
         });
     };
 

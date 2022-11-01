@@ -336,7 +336,7 @@
             'heroPowerChoice1_Description', 'heroPowerChoice2_Description', 'heroPowerChoice3_Description', 'heroPowerChoice4_Description', 'heroPowerChoice5_Description', 'heroPowerChoice6_Description', 'heroPowerChoice7_Description', 'heroPowerChoice8_Description', 'heroPowerChoice9_Description', 'heroPowerChoice10_Description', 'heroPowerChoice11_Description',
             'changeCardTitle', 'newCardButtonChange', 'gameEndTitle', 'gameEndButton',
             'configNewGameButton', 'newGameWarning', 'formConfigLanguage', 'formConfigGameMode',
-            'formConfigWildMode', 'formConfigStandardMode', 'formConfigClassicMode', 'formConfigArenaMode', 'formConfigBattlegroundsMode', 'formConfigFirstClue', 'formConfigFlavorText', 'formConfigIllustration', 'formConfigNone',
+            'formConfigWildMode', 'formConfigStandardMode', 'formConfigLastExpansionMode', 'formConfigClassicMode', 'formConfigArenaMode', 'formConfigBattlegroundsMode', 'formConfigFirstClue', 'formConfigFlavorText', 'formConfigIllustration', 'formConfigNone',
 			'configBackButton', 'gameBy',
         ].forEach(function (elementId) {
             var element = document.getElementById(elementId);
@@ -363,10 +363,14 @@
             case 'wild': { cardMode = translate('formConfigWildMode'); } break;
             case 'classic': { cardMode = translate('formConfigClassicMode'); } break;
             case 'arena': { cardMode = translate('formConfigArenaMode'); } break;
+            case 'lastExpansion': {
+                document.getElementById('guessCard').innerHTML = translate('guessCardLastExpansion');
+                return;
+            } 
             default: { cardMode = translate('formConfigStandardMode'); } break;
         }
 
-		document.getElementById('guessCard').innerHTML = translate('guessCard', cardMode);
+        document.getElementById('guessCard').innerHTML = translate('guessCard', cardMode);
     }
 
     function showErrorModal(title, content) {

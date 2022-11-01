@@ -20,6 +20,7 @@
             guessCard: function (mode) {
 				return 'Devinez la carte <b>' + mode + '</b> à trouver&nbsp;!';
 			},
+            guessCardLastExpansion: 'Devinez la carte <b>de la dernière extension</b> !',
 			tableHistoryName: 'Nom',
             statTitle_cost_ok: function (value, isBattlegrounds) {
                 return isBattlegrounds
@@ -103,6 +104,7 @@
             formConfigGameMode: 'Mode de jeu',
             formConfigWildMode: 'Libre',
             formConfigStandardMode: 'Standard',
+            formConfigLastExpansionMode: 'Juste la dernière (ou future) extension',
             formConfigClassicMode: 'Classique',
             formConfigArenaMode: 'Arène',
             formConfigBattlegroundsMode: 'Champ de bataille',
@@ -124,6 +126,7 @@
             guessCard: function (mode) {
 				return 'Guess the <b>' + mode + '</b> card!';
 			},
+            guessCardLastExpansion: 'Guess the card <b>from last expansion</b>!',
 			tableHistoryName: 'Name',
             statTitle_cost_ok: function (value, isBattlegrounds) {
                 return isBattlegrounds
@@ -207,6 +210,7 @@
             formConfigGameMode: 'Game mode',
             formConfigWildMode: 'Wild',
             formConfigStandardMode: 'Standard',
+            formConfigLastExpansionMode: 'Only the last (or next) expansion',
             formConfigClassicMode: 'Classic',
             formConfigArenaMode: 'Arena',
             formConfigBattlegroundsMode: 'Battlegrounds',

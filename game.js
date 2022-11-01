@@ -33,6 +33,7 @@
             'INITIALS', 'CHANGE',
         ],
         standard: ['CLASS', 'FLAVOR_TEXT', 'RARITY', 'EXPANSION'],
+        lastExpansion: ['CLASS', 'FLAVOR_TEXT', 'RARITY'],
         arena: ['CLASS', 'FLAVOR_TEXT', 'RARITY', 'EXPANSION'],
         wild: ['CLASS', 'FLAVOR_TEXT', 'RARITY', 'EXPANSION'],
         classic: ['CLASS', 'FLAVOR_TEXT', 'RARITY'],
