@@ -398,7 +398,7 @@ var HEARTHSTONE_CARD_TYPE_IDS = {
       return this.fetchTotalBattlegroundsCards();
     }
 
-    return Promise.resolve(this.hearthstoneMetadata.totalBattlegroundsCard);
+    return Promise.resolve(this.hearthstoneMetadata.totalBattlegroundsCards);
   };
 
   Client.prototype.getTotalArenasCards = function () {
@@ -409,7 +409,7 @@ var HEARTHSTONE_CARD_TYPE_IDS = {
       return this.fetchTotalArenaCards();
     }
 
-    return Promise.resolve(this.hearthstoneMetadata.totalBattlegroundsCard);
+    return Promise.resolve(this.hearthstoneMetadata.totalArenaCards);
   };
 
   Client.prototype.getRarityName = function (rarityId) {
