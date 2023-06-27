@@ -466,9 +466,7 @@ var HEARTHSTONE_CARD_TYPE_IDS = {
     return this.getMetadata().then(function (metadata) {
       return metadata.sets.find(function (setToCheck) {
         return (
-          setToCheck.type === "expansion" ||
-          setToCheck.type === "adventure" ||
-          setToCheck.id === 1809 // Hotfix because "Festival of Legends" does not have any type yet...
+          setToCheck.type === "expansion" || setToCheck.type === "adventure"
         );
       });
     });
