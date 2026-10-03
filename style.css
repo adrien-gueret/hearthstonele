@@ -1,1224 +1,1500 @@
 @font-face {
-    font-family: 'Belwe Bold';
-    src: url(./fonts/Belwe-Bold.eot);
-    src: url(./fonts/Belwe-Bold.woff) format("woff"), url(./fonts/Belwe-Bold.ttf) format("truetype");
+  font-family: "Belwe Bold";
+  src: url(./fonts/Belwe-Bold.eot);
+  src:
+    url(./fonts/Belwe-Bold.woff) format("woff"),
+    url(./fonts/Belwe-Bold.ttf) format("truetype");
 }
 
 @font-face {
-    font-family: 'Franklin Gothic';
-    src: url(./fonts/Franklin-Gothic.eot);
-    src: url(./fonts/Franklin-Gothic.woff) format("woff"), url(./fonts/Franklin-Gothic.ttf) format("truetype");
+  font-family: "Franklin Gothic";
+  src: url(./fonts/Franklin-Gothic.eot);
+  src:
+    url(./fonts/Franklin-Gothic.woff) format("woff"),
+    url(./fonts/Franklin-Gothic.ttf) format("truetype");
 }
 
-
-html, body {
-    margin: 0;
-    padding: 0;
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background-color: #ebd6ab;
-    background-image: url(./images/background.jpg);
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
-    animation: fadeIn 1000ms ease-in 1;
-    font-size: 16px;
+  background-color: #ebd6ab;
+  background-image: url(./images/background.jpg);
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  animation: fadeIn 1000ms ease-in 1;
+  font-size: 16px;
 }
 
-body.wild::before, body.battlegrounds::before {
-	content: '';
-	display: block;
-	pointer-events: none;
-	position: fixed;
-	z-index: 0;
-	inset: 0;
-	background-color: rgba(97, 67, 38, 0.2);
+body.wild::before,
+body.battlegrounds::before {
+  content: "";
+  display: block;
+  pointer-events: none;
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  background-color: rgba(97, 67, 38, 0.2);
 }
 
 body.battlegrounds::before {
-	background-color: rgba(215, 95, 95, 0.2);
+  background-color: rgba(215, 95, 95, 0.2);
 }
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; }  }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 #header {
-    background-color: #554131;
-    background-image: url(./images/header.png);
-    background-repeat: repeat-x;
-    height: 72px;
-    color: #f3f3f3;
-    display: flex;
-    align-items: center;
-    padding: 0 32px;
-	position: relative;
+  background-color: #554131;
+  background-image: url(./images/header.png);
+  background-repeat: repeat-x;
+  height: 72px;
+  color: #f3f3f3;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  position: relative;
 }
 
 #header > * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 #guessSubtitle {
-    font-size: 1rem;
-    font-style: italic;
-    margin-left: 12px;
-    margin-top: 12px;
-    display: none;
+  font-size: 1rem;
+  font-style: italic;
+  margin-left: 12px;
+  margin-top: 12px;
+  display: none;
 }
 
 .wild #header::before {
-	content: '';
-    display: block;
-    width: 219px;
-    height: 85px;
-    background-image: url(./images/wild2.png);
-    position: absolute;
-    left: 0;
-    top: 49px;
+  content: "";
+  display: block;
+  width: 219px;
+  height: 85px;
+  background-image: url(./images/wild2.png);
+  position: absolute;
+  left: 0;
+  top: 49px;
 }
 
 .wild #header::after {
-	content: '';
-    display: block;
-    width: 87px;
-    height: 53px;
-    position: absolute;
-    background-image: url(./images/wild1.png);
-    right: 0;
-    top: 36px;
-	transform: scaleX(-1);
+  content: "";
+  display: block;
+  width: 87px;
+  height: 53px;
+  position: absolute;
+  background-image: url(./images/wild1.png);
+  right: 0;
+  top: 36px;
+  transform: scaleX(-1);
 }
 
 #rules .gameBy {
-    font-size: 1rem;
-    text-align: right;
-    font-style: italic;
+  font-size: 1rem;
+  text-align: right;
+  font-style: italic;
 }
 
 #guessForm {
-    margin-bottom: 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 #searchInput {
-    padding: 8px 16px;
-    font-size: 2rem;
-    border-radius: 20px;
-    border: 3px solid #b49b76;
-    outline: 0;
-    background-color: #fff;
-    flex-grow: .3;
-    margin-right: 16px;
+  padding: 8px 16px;
+  font-size: 2rem;
+  border-radius: 20px;
+  border: 3px solid #b49b76;
+  outline: 0;
+  background-color: #fff;
+  flex-grow: 0.3;
+  margin-right: 16px;
 }
 
 #searchInput:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
 #searchInput:focus-visible {
-    border-color: #7687b4;
-    background-color: #f3f3f3;
+  border-color: #7687b4;
+  background-color: #f3f3f3;
 }
 
 #rules {
-    display: none;
-    padding: 8px 16px;
+  display: none;
+  padding: 8px 16px;
 }
 
 #rules p {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .rulesTeaser {
-    text-align: center;
-    padding: 16px;
-    padding-bottom: 0;
+  text-align: center;
+  padding: 16px;
+  padding-bottom: 0;
 }
 
 .rulesButtonContainer {
-    text-align: center;
-    margin-bottom: 0;
+  text-align: center;
+  margin-bottom: 0;
 }
 
 .button {
-    background-image: linear-gradient(90deg,#921b9a,#b921c4,#921b9a);
-    border-radius: 10px;
-    color: white;
-    text-transform: uppercase;
-    font-weight: bold;
-    transition: background-image 100ms ease-in;
-    border: 3px solid #555;
-    cursor: pointer;
-    padding: 8px;
-    font-size: 1.5rem;
+  background-image: linear-gradient(90deg, #921b9a, #b921c4, #921b9a);
+  border-radius: 10px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-image 100ms ease-in;
+  border: 3px solid #555;
+  cursor: pointer;
+  padding: 8px;
+  font-size: 1.5rem;
 }
 
 .button.secondary {
-    margin-right: 16px;
-    filter: grayscale(1);
+  margin-right: 16px;
+  filter: grayscale(1);
 }
 
 .button:hover {
-    background-image: linear-gradient(90deg,#c24bca,#d13cdb,#9829a0);
+  background-image: linear-gradient(90deg, #c24bca, #d13cdb, #9829a0);
 }
 
 .button:focus {
-    background-image: linear-gradient(75deg,#cc50d5,#de40e9,#a730af);
+  background-image: linear-gradient(75deg, #cc50d5, #de40e9, #a730af);
 }
 
 [disabled] {
-    pointer-events: none;
-    opacity: .1;
+  pointer-events: none;
+  opacity: 0.1;
 }
 
 #game {
-    display: none;
-    padding-bottom: 300px;
-    flex-direction: column;
-    min-height: calc(100vh - 440px);
+  display: none;
+  padding-bottom: 300px;
+  flex-direction: column;
+  min-height: calc(100vh - 440px);
 }
 
 .score {
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    background-image: url(./images/score.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    position: fixed;
-    left: 0;
-    bottom: 8px;
-    text-align: center;
-    font-size: 2.5rem;
-    cursor: default;
-    z-index: 100;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  background-image: url(./images/score.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: fixed;
+  left: 0;
+  bottom: 8px;
+  text-align: center;
+  font-size: 2.5rem;
+  cursor: default;
+  z-index: 100;
 }
 
 .score .plus {
-    position: relative;
-    top: 5px;
-    left: 2px;
+  position: relative;
+  top: 5px;
+  left: 2px;
 }
 
 #scoreAnimation {
-    position: fixed;
-    display: none;
-    z-index: 200;
-    transform: translateY(-50vh);
-    font-size: 3rem;
-    animation: yAxis 750ms;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
-    animation-delay: 1s;
-    left: 16px;
-    bottom: 8px;
+  position: fixed;
+  display: none;
+  z-index: 200;
+  transform: translateY(-50vh);
+  font-size: 3rem;
+  animation: yAxis 750ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
+  left: 16px;
+  bottom: 8px;
 }
 
 #scoreAnimation .score {
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
 
-    transform: translateX(50vw) scale(1.5);
+  transform: translateX(50vw) scale(1.5);
 
-    animation: xAxis 750ms;
-    animation-timing-function: ease-in;
-    animation-fill-mode: forwards;
-    animation-delay: 1s;
+  animation: xAxis 750ms;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  animation-delay: 1s;
 }
-  
-@keyframes yAxis { 
-    0% {
-        transform: translateY(-50vh);
-        filter: none;
-    }   
 
-    100% {
-        transform: translateY(28px);
-        filter: none;
-    }
+@keyframes yAxis {
+  0% {
+    transform: translateY(-50vh);
+    filter: none;
+  }
+
+  100% {
+    transform: translateY(28px);
+    filter: none;
+  }
 }
 
 @keyframes xAxis {
-    0% {
-        transform: translateX(50vw) scale(1.5) ;
-    }
+  0% {
+    transform: translateX(50vw) scale(1.5);
+  }
 
-    100% {
-        transform: translateX(-36px) scale(0.6);
-    }
+  100% {
+    transform: translateX(-36px) scale(0.6);
+  }
 }
 
 .navButton {
-    padding: 0;
-    margin: 0;
-    background-color: transparent;
-    border: 0;
-    outline: 0;
-    z-index: 100;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  z-index: 100;
 
-    width: 64px;
-    height: 64px;
-    cursor: pointer;
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
 
-    position: fixed;
-    bottom: 80px;
-    right: 16px;
+  position: fixed;
+  bottom: 80px;
+  right: 16px;
 
-    background-image: url(./images/footer_nav.png);
-    background-repeat: no-repeat;
-    background-position: left;
+  background-image: url(./images/footer_nav.png);
+  background-repeat: no-repeat;
+  background-position: left;
 }
 
 .navButton.config {
-    background-position: right;
-    bottom: 8px;
+  background-position: right;
+  bottom: 8px;
 }
 
 #guessCard {
-    padding: 8px 16px;
-    margin: 0;
-    font-size: 1.5rem;
-	text-align: center;
+  padding: 8px 16px;
+  margin: 0;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
 #flavorText {
-    border-left: 6px solid currentColor;
-    background-image: linear-gradient(90deg, #f3f3f3, rgba(255,255,255,.2));
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    max-width: 75vw;
-    font-size: 1.5rem;
-    padding: 8px;
-    margin: 16px auto 12px;
-	display: none;
+  border-left: 6px solid currentColor;
+  background-image: linear-gradient(90deg, #f3f3f3, rgba(255, 255, 255, 0.2));
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  max-width: 75vw;
+  font-size: 1.5rem;
+  padding: 8px;
+  margin: 16px auto 12px;
+  display: none;
 }
 
 #pixelatedIllustration {
-	display: none;
-	text-align: center;
+  display: none;
+  text-align: center;
 }
 
 #pixelatedIllustration canvas {
-	margin: 0 8px;
-} 
+  margin: 0 8px;
+}
 
 .stickyForm {
-    padding-bottom: 32px;
+  padding-bottom: 32px;
 }
 
 #player {
-    position: fixed;
-    margin: 0;
-    margin-top: auto;
-    width: 260px;
-    left: 8px;
-    bottom: 8px;
-    transform-origin: bottom left;
-    z-index: 100;
-    transform: scale(.7);
+  position: fixed;
+  margin: 0;
+  margin-top: auto;
+  width: 260px;
+  left: 8px;
+  bottom: 8px;
+  transform-origin: bottom left;
+  z-index: 100;
+  transform: scale(0.7);
 }
 
 .bob-normal {
-    display: inline;
+  display: inline;
 }
 
 .bob-battlegrounds {
-    display: none;
+  display: none;
 }
 
 .bob-classic {
-    display: none;
+  display: none;
 }
 
 .bob-arena {
-    display: none;
+  display: none;
 }
 
 .battlegrounds .bob-normal,
 .classic .bob-normal,
 .arena .bob-normal {
-    display: none;
+  display: none;
 }
 
 .battlegrounds .bob-battlegrounds {
-    display: inline;
+  display: inline;
 }
 
 .classic .bob-classic {
-    display: inline;
+  display: inline;
 }
 
 .arena .bob-arena {
-    display: inline;
+  display: inline;
 }
 
 #damage {
-    display: none;
-    width: 155px;
-    height: 173px;
-    position: absolute;
-    background-image: url(./images/damage.png);
-    font-size: 3.5rem;
-    left: 45px;
-    top: 70px;
-    opacity: 1;
-    transform: scale(0);
-    animation: bounce 2s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
+  display: none;
+  width: 155px;
+  height: 173px;
+  position: absolute;
+  background-image: url(./images/damage.png);
+  font-size: 3.5rem;
+  left: 45px;
+  top: 70px;
+  opacity: 1;
+  transform: scale(0);
+  animation: bounce 2s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
 }
 
 @keyframes bounce {
-    10% {
-        opacity: 1;
-        transform: scale(1.2);
-    }
+  10% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 
-    20% {
-        opacity: 1;
-        transform: scale(0.8);
-    }
-    
-    30% {
-        opacity: 1;
-        transform: scale(1.1);
-    }
-    
-    40% {
-        opacity: 1;
-        transform: scale(1);
-    }
+  20% {
+    opacity: 1;
+    transform: scale(0.8);
+  }
 
-    60% {
-        opacity: 1;
-        transform: scale(1);
-    }
+  30% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
 
-    80% {
-        opacity: 1;
-        transform: scale(1);
-    }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
 
-    100% {
-        transform: scale(1);
-        opacity: 0;
-    }
+  60% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  80% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
 }
 
 #damageValue {
-    position: absolute;
-    left: 70px;
-    font-weight: bold;
-    top: 52px;
-    transform: rotate(347deg);
+  position: absolute;
+  left: 70px;
+  font-weight: bold;
+  top: 52px;
+  transform: rotate(347deg);
 }
 
 #playerHealthContainer {
-    position: absolute;
-    right: -15px;
-    bottom: 0;
-    background-repeat: no-repeat;
-    background-image: url(./images/health_big.png);
-    height: 100px;
-    width: 80px;
-    background-size: contain;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 3.5rem;
+  position: absolute;
+  right: -15px;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-image: url(./images/health_big.png);
+  height: 100px;
+  width: 80px;
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 3.5rem;
 }
 
 #playerHealth {
-    position: relative;
-    top: 6px;
-    right: 5px;
-    cursor: default;
+  position: relative;
+  top: 6px;
+  right: 5px;
+  cursor: default;
 }
 
 #playerHealth.hurt {
-    color: red;
+  color: red;
 }
 
 .hearthstoneText {
-    color: white;
-    text-shadow: #000 4px 0 0, #000 3.25px 2px 0, #000 2px 3px 0, #000 0.3px 2px 0, #000 -1.5px 3.6px 0, #000 -3.2px 2.2px 0, #000 -4px 0.6px 0, #000 -3.6px -1.4px 0, #000 -2.6px -3px 0, #000 -0.8px -4px 0, #000 1.2px -4px 0, #000 2.8px -2.8px 0, #000 4px -1.1px 0;
-    font-family: Belwe Bold;
-    font-weight: 400;
+  color: white;
+  text-shadow:
+    #000 4px 0 0,
+    #000 3.25px 2px 0,
+    #000 2px 3px 0,
+    #000 0.3px 2px 0,
+    #000 -1.5px 3.6px 0,
+    #000 -3.2px 2.2px 0,
+    #000 -4px 0.6px 0,
+    #000 -3.6px -1.4px 0,
+    #000 -2.6px -3px 0,
+    #000 -0.8px -4px 0,
+    #000 1.2px -4px 0,
+    #000 2.8px -2.8px 0,
+    #000 4px -1.1px 0;
+  font-family: Belwe Bold;
+  font-weight: 400;
 }
 
 #heroPower {
-    width: 144px;
-    height: 172px;
-    border: 0;
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-image: url(./images/heropower.png);
-    background-position: left;
-    cursor: pointer;
-    outline: 0;
-    position: absolute;
-    top: 18px;
-    right: -145px;
+  width: 144px;
+  height: 172px;
+  border: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-image: url(./images/heropower.png);
+  background-position: left;
+  cursor: pointer;
+  outline: 0;
+  position: absolute;
+  top: 18px;
+  right: -145px;
 }
 
 #heroPower.used {
-    pointer-events: none;
-    background-position: right;
+  pointer-events: none;
+  background-position: right;
 }
 
-#heroPower:not(.used):hover, #heroPower:not(.used):focus,
-.heroPowerChoice:hover, .heroPowerChoice:focus,
+#heroPower:not(.used):hover,
+#heroPower:not(.used):focus,
+.heroPowerChoice:hover,
+.heroPowerChoice:focus,
 #scoreAnimation,
-.navButton:hover, .navButton:focus
-{
-    filter: drop-shadow(0px 0px 5px #fff) drop-shadow(0px 0px 5px #fff) drop-shadow(0px 0px 5px #fff) drop-shadow(0px 0px 5px #fff);
+.navButton:hover,
+.navButton:focus {
+  filter: drop-shadow(0px 0px 5px #fff) drop-shadow(0px 0px 5px #fff)
+    drop-shadow(0px 0px 5px #fff) drop-shadow(0px 0px 5px #fff);
 }
 
 #heroPowerDetails {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    width: 329px;
-    height: 518px;
-    background-image: url('./images/hero-power-details.png');
-    background-repeat: no-repeat;
-    position: absolute;
-    bottom: 210px;
-    right: -235px;
-    z-index: 100;
-    pointer-events: none;
-    transform: scale(.75);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 329px;
+  height: 518px;
+  background-image: url("./images/hero-power-details.png");
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 210px;
+  right: -235px;
+  z-index: 100;
+  pointer-events: none;
+  transform: scale(0.75);
 }
 
 .hearthstoneTitle {
-    margin-bottom: 34px;
-    font-size: 1.5rem;
+  margin-bottom: 34px;
+  font-size: 1.5rem;
 }
 
 .hearthstoneDescription {
-    font-family: 'Franklin Gothic';
-    width: 205px;
-    margin-bottom: 75px;
-    font-size: 1.5rem;
-    line-height: 1em;
-    text-align: center;
-    color: #000;
+  font-family: "Franklin Gothic";
+  width: 205px;
+  margin-bottom: 75px;
+  font-size: 1.5rem;
+  line-height: 1em;
+  text-align: center;
+  color: #000;
 }
 
-#heroPower:not(.used):hover + #heroPowerDetails, #heroPower:not(.used):focus + #heroPowerDetails {
-    display: flex;
+#heroPower:not(.used):hover + #heroPowerDetails,
+#heroPower:not(.used):focus + #heroPowerDetails {
+  display: flex;
 }
 
 #tableHistoryContainer {
-    overflow: auto;
-    margin-bottom: 32px;
-    display: none;
+  overflow: auto;
+  margin-bottom: 32px;
+  display: none;
 }
 
 .tableHistory {
-    border-collapse: collapse;
-    margin: auto;
+  border-collapse: collapse;
+  margin: auto;
 }
 
-.tableHistory td, .tableHistory th {
-    border: 3px solid #554131;
+.tableHistory td,
+.tableHistory th {
+  border: 3px solid #554131;
 }
 
 .tableHistory td {
-    cursor: help;
+  cursor: help;
 }
 
 .tableHistory th.tableCardStat {
-    height: 40px;
+  height: 40px;
 }
 
 .tableHistory th.tableCardStat.cost {
-    background-size: 40%;
+  background-size: 40%;
 }
 
 .tableHistory .empty {
-    pointer-events: none;
-    border: 0;
+  pointer-events: none;
+  border: 0;
 }
 
 td.tableCardName {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: right bottom;
-    background-color: #000;
-    padding: 0;
-    position: relative;
-    height: 64px;
-    width: 100px;
-    font-size: 1rem;
-    line-height: 26px;
-    cursor: default;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-color: #000;
+  padding: 0;
+  position: relative;
+  height: 64px;
+  width: 100px;
+  font-size: 1rem;
+  line-height: 26px;
+  cursor: default;
 }
 
 .tableCardName img {
-    position: fixed;
-    display: none;
-    z-index: 100;
-    top: calc(50vh - 250px);
-    left: 250px;
-    pointer-events: none;
-    z-index: 150;
+  position: fixed;
+  display: none;
+  z-index: 100;
+  top: calc(50vh - 250px);
+  left: 250px;
+  pointer-events: none;
+  z-index: 150;
 }
 
 .nameContainer {
-    padding: 0 8px;
-    height: 100%;
-    width: calc(100% - 16px);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    background-image: linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,0) 50%);
+  padding: 0 8px;
+  height: 100%;
+  width: calc(100% - 16px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0) 50%
+  );
 }
 
-#changeCardImage img, #roundSuccessImage img {
-    width: 200px;
+#changeCardImage img,
+#roundSuccessImage img {
+  width: 200px;
 }
 
 .tableCardStat {
-    width: 68px;
-    height: 68px;
-    text-align: center;
-    background-size: 80%, cover, cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    font-size: 2rem;
-    background-color: #fff;
+  width: 68px;
+  height: 68px;
+  text-align: center;
+  background-size: 80%, cover, cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 2rem;
+  background-color: #fff;
 }
 
-.battlegrounds .tableCardStat.cost:not(.force-mana) { background-image: url(./images/tavern_tiers.png); }
-
-.battlegrounds .tableCardStat.cost.ok:not(.force-mana), .battlegrounds .tableCardStat.cost.almost, .battlegrounds .tableCardStat.cost.ko {
-    background-size: auto, cover, cover;
-    color: transparent;
-    text-shadow: none;
+.battlegrounds .tableCardStat.cost:not(.force-mana) {
+  background-image: url(./images/tavern_tiers.png);
 }
 
-.tableCardStat.cost { background-image: url(./images/mana.png); }
-.tableCardStat.cost.almost { background-image: url(./images/mana.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px); }
-.tableCardStat.cost.ko { background-image: url(./images/mana.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px); }
+.battlegrounds .tableCardStat.cost.ok:not(.force-mana),
+.battlegrounds .tableCardStat.cost.almost,
+.battlegrounds .tableCardStat.cost.ko {
+  background-size: auto, cover, cover;
+  color: transparent;
+  text-shadow: none;
+}
 
-.battlegrounds .tableCardStat.cost.ok:not(.force-mana) { background-image: url(./images/all_tavern_tiers.png); }
-.battlegrounds .tableCardStat.cost.almost { background-image: url(./images/all_tavern_tiers.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px); }
-.battlegrounds .tableCardStat.cost.ko { background-image: url(./images/all_tavern_tiers.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px); }
+.tableCardStat.cost {
+  background-image: url(./images/mana.png);
+}
+.tableCardStat.cost.almost {
+  background-image:
+    url(./images/mana.png),
+    repeating-linear-gradient(
+      -45deg,
+      #cfaf04,
+      #cfaf04 2px,
+      transparent 2px,
+      transparent 25px
+    );
+}
+.tableCardStat.cost.ko {
+  background-image:
+    url(./images/mana.png),
+    repeating-linear-gradient(
+      -45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    );
+}
 
-.battlegrounds .tableCardStat.cost.value-1 { background-position: 0; }
-.battlegrounds .tableCardStat.cost.value-2 { background-position: -68px, 0, 0; }
-.battlegrounds .tableCardStat.cost.value-3 { background-position: -136px, 0, 0; }
-.battlegrounds .tableCardStat.cost.value-4 { background-position: -204px, 0, 0; }
-.battlegrounds .tableCardStat.cost.value-5 { background-position: -272px, 0, 0; }
-.battlegrounds .tableCardStat.cost.value-6 { background-position: -340px, 0, 0; }
+.battlegrounds .tableCardStat.cost.ok:not(.force-mana) {
+  background-image: url(./images/all_tavern_tiers.png);
+}
+.battlegrounds .tableCardStat.cost.almost {
+  background-image:
+    url(./images/all_tavern_tiers.png),
+    repeating-linear-gradient(
+      -45deg,
+      #cfaf04,
+      #cfaf04 2px,
+      transparent 2px,
+      transparent 25px
+    );
+}
+.battlegrounds .tableCardStat.cost.ko {
+  background-image:
+    url(./images/all_tavern_tiers.png),
+    repeating-linear-gradient(
+      -45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    );
+}
+
+.battlegrounds .tableCardStat.cost.value-1 {
+  background-position: 0;
+}
+.battlegrounds .tableCardStat.cost.value-2 {
+  background-position: -68px, 0, 0;
+}
+.battlegrounds .tableCardStat.cost.value-3 {
+  background-position: -136px, 0, 0;
+}
+.battlegrounds .tableCardStat.cost.value-4 {
+  background-position: -204px, 0, 0;
+}
+.battlegrounds .tableCardStat.cost.value-5 {
+  background-position: -272px, 0, 0;
+}
+.battlegrounds .tableCardStat.cost.value-6 {
+  background-position: -340px, 0, 0;
+}
 
 .tableCardStat.attack {
-    background-image: url(./images/attack.png);
-    background-position: 5px, center, center;
+  background-image: url(./images/attack.png);
+  background-position: 5px, center, center;
 }
 
 .tableCardStat.attack.almost {
-    background-image: url(./images/attack.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px);
+  background-image:
+    url(./images/attack.png),
+    repeating-linear-gradient(
+      -45deg,
+      #cfaf04,
+      #cfaf04 2px,
+      transparent 2px,
+      transparent 25px
+    );
 }
 
 .tableCardStat.attack.ko {
-    background-image: url(./images/attack.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px);
+  background-image:
+    url(./images/attack.png),
+    repeating-linear-gradient(
+      -45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    );
 }
 
 .tableCardStat.attack_weapon {
-    background-image: url(./images/attack_weapon.png);
+  background-image: url(./images/attack_weapon.png);
 }
 
 .tableCardStat.attack_weapon.almost {
-    background-image: url(./images/attack_weapon.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px);
+  background-image:
+    url(./images/attack_weapon.png),
+    repeating-linear-gradient(
+      -45deg,
+      #cfaf04,
+      #cfaf04 2px,
+      transparent 2px,
+      transparent 25px
+    );
 }
 
 .tableCardStat.attack_weapon.ko {
-    background-image: url(./images/attack_weapon.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px);
+  background-image:
+    url(./images/attack_weapon.png),
+    repeating-linear-gradient(
+      -45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    );
 }
 
 .tableCardStat.all_attacks {
-    background-image: url(./images/stats_attack.png);
+  background-image: url(./images/stats_attack.png);
 }
 
 .tableCardStat.health {
-    background-image: url(./images/health.png);
-    background-position: 9px, center, center;
+  background-image: url(./images/health.png);
+  background-position: 9px, center, center;
 }
 
 .tableCardStat.health.almost {
-    background-image: url(./images/health.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px);
+  background-image:
+    url(./images/health.png),
+    repeating-linear-gradient(
+      -45deg,
+      #cfaf04,
+      #cfaf04 2px,
+      transparent 2px,
+      transparent 25px
+    );
 }
 
 .tableCardStat.health.ko {
-    background-image: url(./images/health.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px);
+  background-image:
+    url(./images/health.png),
+    repeating-linear-gradient(
+      -45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    );
 }
 
 .tableCardStat.armor {
-    background-image: url(./images/armor.png);
+  background-image: url(./images/armor.png);
 }
 
 .tableCardStat.armor.almost {
-    background-image: url(./images/armor.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px);
+  background-image:
+    url(./images/armor.png),
+    repeating-linear-gradient(
+      -45deg,
+      #cfaf04,
+      #cfaf04 2px,
+      transparent 2px,
+      transparent 25px
+    );
 }
 
 .tableCardStat.armor.ko {
-    background-image: url(./images/armor.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px);
+  background-image:
+    url(./images/armor.png),
+    repeating-linear-gradient(
+      -45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    );
 }
 
 .tableCardStat.durability {
-    background-image: url(./images/durability.png);
+  background-image: url(./images/durability.png);
 }
 
 .tableCardStat.durability.almost {
-    background-image: url(./images/durability.png), repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px);
+  background-image:
+    url(./images/durability.png),
+    repeating-linear-gradient(
+      -45deg,
+      #cfaf04,
+      #cfaf04 2px,
+      transparent 2px,
+      transparent 25px
+    );
 }
 
 .tableCardStat.durability.ko {
-    background-image: url(./images/durability.png), repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px);
+  background-image:
+    url(./images/durability.png),
+    repeating-linear-gradient(
+      -45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    );
 }
 
 .tableCardStat.none.almost {
-    background-image: none, repeating-linear-gradient(-45deg, #cfaf04, #cfaf04 2px, transparent 2px, transparent 25px);
+  background-image:
+    none,
+    repeating-linear-gradient(
+      -45deg,
+      #cfaf04,
+      #cfaf04 2px,
+      transparent 2px,
+      transparent 25px
+    );
 }
 
 .tableCardStat.none.ko {
-    background-image: none, repeating-linear-gradient(-45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px), repeating-linear-gradient(45deg, #c70909, #c70909 2px, transparent 2px, transparent 25px);
+  background-image:
+    none,
+    repeating-linear-gradient(
+      -45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    ),
+    repeating-linear-gradient(
+      45deg,
+      #c70909,
+      #c70909 2px,
+      transparent 2px,
+      transparent 25px
+    );
 }
 
 .tableCardStat.all_healths {
-    background-image: url(./images/stats_health.png);
+  background-image: url(./images/stats_health.png);
 }
 
 .tableCardStat.ok {
-    background-color: chartreuse;
+  background-color: chartreuse;
 }
 
 .tableCardStat.ko {
-    background-color: red;
+  background-color: red;
 }
 
 .tableCardStat.almost {
-    background-color: gold;
+  background-color: gold;
 }
 
 .modalOverlay {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 500;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, .9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 .modal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-style: solid;
-    border-image: url(./images/modale.png);
-    border-image-width: 25;
-    border-image-slice: 25 fill;
-    color: #f3f3f3;
-    text-align: center;
-	padding: 16px;
-	max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-style: solid;
+  border-image: url(./images/modale.png);
+  border-image-width: 25;
+  border-image-slice: 25 fill;
+  color: #f3f3f3;
+  text-align: center;
+  padding: 16px;
+  max-height: 100%;
 }
 
 #errorModal .modal {
-    padding-top: 40px;
+  padding-top: 40px;
 }
 
 .modalInner {
-    overflow: auto;
-    margin: 8px 0 32px;
+  overflow: auto;
+  margin: 8px 0 32px;
 }
 
 @keyframes slideUp {
-    25% {
-        transform: translateY(100vh);
-    }
+  25% {
+    transform: translateY(100vh);
+  }
 
-    50% {
-        transform: translateY(-20px);
-    }
+  50% {
+    transform: translateY(-20px);
+  }
 
-    75% {
-        transform: translateY(10px);
-    }
+  75% {
+    transform: translateY(10px);
+  }
 
-    100% {
-        transform: translateY(0);
-    }
+  100% {
+    transform: translateY(0);
+  }
 }
 
-
 .modal h2 {
-    font-size: 2rem;
-    margin: 0;
+  font-size: 2rem;
+  margin: 0;
 }
 
 .modal .button {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 #heroPowerModal {
-    display: none;
+  display: none;
 }
 
 .heroPowerModal {
-    padding: 0;
-    text-align: center;
+  padding: 0;
+  text-align: center;
 }
 
 .heroPowerModalInner {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    margin-left: -160px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin-left: -160px;
 }
 
 .heroPowerChoice {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    width: 370px;
-    height: 543px;
-    position: relative;
-    transform: scale(.75);
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
-    outline: 0;
-    flex-shrink: 0;
-    margin-right: -64px;
-    position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 370px;
+  height: 543px;
+  position: relative;
+  transform: scale(0.75);
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  outline: 0;
+  flex-shrink: 0;
+  margin-right: -64px;
+  position: relative;
 }
 
 .heroPowerChoice::before {
-    display: block;
-    content: '';
-    background-image: url('./images/hero_power_images.png');
-    width: 280px;
-    height: 210px;
-    background-repeat: no-repeat;
-    position: absolute;
-    z-index: -2;
-    left: 55px;
-    top: 65px;
+  display: block;
+  content: "";
+  background-image: url("./images/hero_power_images.png");
+  width: 280px;
+  height: 210px;
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: -2;
+  left: 55px;
+  top: 65px;
 }
 
 .heroPowerChoice::after {
-    display: block;
-    content: '';
-    width: 370px;
-    height: 543px;
-    background-image: url('./images/hero_power_card.png');
-    background-repeat: no-repeat;
-    position: absolute;
-    z-index: -1;
-    left: 0;
-    top: 0;
+  display: block;
+  content: "";
+  width: 370px;
+  height: 543px;
+  background-image: url("./images/hero_power_card.png");
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
 }
 
 .heroPowerChoice .hearthstoneTitle {
-    font-size: 1.75rem;
-    position: relative;
-    top: 6px;
-    text-shadow: #000 2px 0 0, #000 1.75517px 0.95885px 0, #000 1.0806px 1.68294px 0, #000 0.14147px 1.99499px 0, #000 -0.83229px 1.81859px 0, #000 -1.60229px 1.19694px 0, #000 -1.97998px 0.28224px 0, #000 -1.87291px -0.70157px 0, #000 -1.30729px -1.5136px 0, #000 -0.42159px -1.95506px 0, #000 0.56732px -1.91785px 0, #000 1.41734px -1.41108px 0, #000 1.92034px -0.55883px 0;
+  font-size: 1.75rem;
+  position: relative;
+  top: 6px;
+  text-shadow:
+    #000 2px 0 0,
+    #000 1.75517px 0.95885px 0,
+    #000 1.0806px 1.68294px 0,
+    #000 0.14147px 1.99499px 0,
+    #000 -0.83229px 1.81859px 0,
+    #000 -1.60229px 1.19694px 0,
+    #000 -1.97998px 0.28224px 0,
+    #000 -1.87291px -0.70157px 0,
+    #000 -1.30729px -1.5136px 0,
+    #000 -0.42159px -1.95506px 0,
+    #000 0.56732px -1.91785px 0,
+    #000 1.41734px -1.41108px 0,
+    #000 1.92034px -0.55883px 0;
 }
 
 .heroPowerCost {
-    font-size: 4.5rem;
-    position: absolute;
-    top: 35px;
-    left: 30px;
+  font-size: 4.5rem;
+  position: absolute;
+  top: 35px;
+  left: 30px;
 }
 
 #heroPowerRarity::before {
-    background-position: 0px;
+  background-position: 0px;
 }
 
-#heroPowerClass::before, #heroPowerType::before {
-    background-position: -280px;
+#heroPowerClass::before,
+#heroPowerType::before {
+  background-position: -280px;
 }
 
 #heroPowerExpansion::before {
-    background-position: -560px;
+  background-position: -560px;
 }
 
 #heroPowerInitials::before {
-    background-position: -840px;
+  background-position: -840px;
 }
 
 #heroPowerChange::before {
-    background-position: -1120px;
+  background-position: -1120px;
 }
 
 #heroPowerFlavorText::before {
-    background-position: -1400px;
+  background-position: -1400px;
 }
 
 #heroPowerImage1::before {
-	background-position: -1680px;
+  background-position: -1680px;
 }
 
 #heroPowerImage2::before {
-	background-position: -1960px;
+  background-position: -1960px;
 }
 
 #heroPowerImage3::before {
-	background-position: -2240px;
+  background-position: -2240px;
 }
 
 #heroPowerText::before {
-	background-position: -2520px;
+  background-position: -2520px;
 }
 
 #allClues {
-    text-align: center;
-    margin-bottom: 8px;
+  text-align: center;
+  margin-bottom: 8px;
 }
 
 .clue {
-    margin: 0 8px;
-    display: block
+  margin: 0 8px;
+  display: block;
 }
 
 .clueIcon {
-    vertical-align: middle;
-    display: inline-block;
-    background-repeat: no-repeat;
-    margin: 0 4px 0 8px;
-    background-image: url(./images/clue_icons.png?v3);
+  vertical-align: middle;
+  display: inline-block;
+  background-repeat: no-repeat;
+  margin: 0 4px 0 8px;
+  background-image: url(./images/clue_icons.png?v3);
 }
 
 .clueIcon.rarity {
-    width: 27px;
-    height: 39px;
+  width: 27px;
+  height: 39px;
 }
 
 .clueIcon.expansion {
-    width: 39px;
-    height: 39px;
+  width: 39px;
+  height: 39px;
 }
 
-.clueIcon.class, .clueIcon.type {
-    width: 39px;
-    height: 39px;
-    background-position: 0 -39px;
+.clueIcon.class,
+.clueIcon.type {
+  width: 39px;
+  height: 39px;
+  background-position: 0 -39px;
 }
 
 .clueIcon.class.mage {
-    background-position: -136px 0;
+  background-position: -136px 0;
 }
 
 .clueIcon.class.demonhunter {
-    background-position: -175px 0;
+  background-position: -175px 0;
 }
 
 .clueIcon.class.druid {
-    background-position: -214px 0;
+  background-position: -214px 0;
 }
 
 .clueIcon.class.hunter {
-    background-position: -253px 0;
+  background-position: -253px 0;
 }
 
 .clueIcon.class.deathknight {
-    background-position: -292px 0;
+  background-position: -292px 0;
 }
 
 .clueIcon.class.warrior {
-    background-position: -39px -39px;
+  background-position: -39px -39px;
 }
 
 .clueIcon.class.warlock {
-    background-position: -78px -39px;
+  background-position: -78px -39px;
 }
 
 .clueIcon.class.shaman {
-    background-position: -117px -39px;
+  background-position: -117px -39px;
 }
 
 .clueIcon.class.rogue {
-    background-position: -156px -39px;
+  background-position: -156px -39px;
 }
 
 .clueIcon.class.priest {
-    background-position: -195px -39px;
+  background-position: -195px -39px;
 }
 
 .clueIcon.class.paladin {
-    background-position: -234px -39px;
+  background-position: -234px -39px;
 }
 
 .clueIcon.type.beast {
-    background-position: 0 -78px;
+  background-position: 0 -78px;
 }
 
 .clueIcon.type.demon {
-    background-position: -39px -78px;
+  background-position: -39px -78px;
 }
 
 .clueIcon.type.dragon {
-    background-position: -78px -78px;
+  background-position: -78px -78px;
 }
 
 .clueIcon.type.elemental {
-    background-position: -117px -78px;
+  background-position: -117px -78px;
 }
 
 .clueIcon.type.mech {
-    background-position: -156px -78px;
+  background-position: -156px -78px;
 }
 
 .clueIcon.type.pirate {
-    background-position: -195px -78px;
+  background-position: -195px -78px;
 }
 
 .clueIcon.type.murloc {
-    background-position: -234px -78px;
+  background-position: -234px -78px;
 }
 
 .clueIcon.type.quilboar {
-    background-position: 0px -117px;
+  background-position: 0px -117px;
 }
 
 .clueIcon.type.naga {
-    background-position: -39px -117px;
+  background-position: -39px -117px;
 }
 
 .clueIcon.type.all {
-    background-position: -78px -117px;
+  background-position: -78px -117px;
 }
 
 .clueIcon.type.undead {
-    background-position: -117px -117px;
+  background-position: -117px -117px;
+}
+
+.clueIcon.type.aberration {
+  background-position: -156px -117px;
 }
 
 .clueIcon.type.typeless {
-    background-position: 0 -39px;
+  background-position: 0 -39px;
 }
 
 #gameEndCards img {
-    width: 200px;
+  width: 200px;
 }
 
 #statsExplanation {
-    text-align: center;
-    margin-top: 4px;
+  text-align: center;
+  margin-top: 4px;
 }
 
 #configForm button {
-    margin-top: 16px;
+  margin-top: 16px;
 }
 
 .warning {
-    position: absolute;
-    right: 78px;
-    bottom: 28px;
-    font-style: italic;
-    font-size: .9rem;
-    opacity: .2;
-    transition: opacity 300ms;
-    display: none;
+  position: absolute;
+  right: 78px;
+  bottom: 28px;
+  font-style: italic;
+  font-size: 0.9rem;
+  opacity: 0.2;
+  transition: opacity 300ms;
+  display: none;
 }
 
 .warning img {
-    vertical-align: middle;
-    height: 32px;
+  vertical-align: middle;
+  height: 32px;
 }
 
-#configNewGameButton:hover + .warning, #configNewGameButton:focus + .warning {
-    opacity: 1;
+#configNewGameButton:hover + .warning,
+#configNewGameButton:focus + .warning {
+  opacity: 1;
 }
 
-#configBackButton:hover ~ .warning, #configBackButton:focus ~ .warning {
-    opacity: 0;
+#configBackButton:hover ~ .warning,
+#configBackButton:focus ~ .warning {
+  opacity: 0;
 }
 
 .fieldsetContainer {
-	display: flex;
-    flex-wrap: wrap;
-	flex-direction: row;
-    align-items: center;
-	justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 fieldset {
-    border-color: #2f2b25;
-    border-style: double;
-    border-radius: 20px;
-    padding: 16px;
-    text-align: left;
-	margin: 8px;
-	flex-shrink: 0;
-	box-sizing: border-box;
-	width: 80%;
+  border-color: #2f2b25;
+  border-style: double;
+  border-radius: 20px;
+  padding: 16px;
+  text-align: left;
+  margin: 8px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 80%;
 }
 
 legend {
-    font-weight: bold;
-    padding: 0;
-    font-size: 1.3rem;
-    position: relative;
-    left: -16px;
+  font-weight: bold;
+  padding: 0;
+  font-size: 1.3rem;
+  position: relative;
+  left: -16px;
 }
 
 legend img {
-    height: 40px;
-    vertical-align: middle;
+  height: 40px;
+  vertical-align: middle;
 }
 
 fieldset label {
-    font-size: 1.2rem;
-    position: relative;
-    z-index: 1;
-    display: block;
+  font-size: 1.2rem;
+  position: relative;
+  z-index: 1;
+  display: block;
 }
 
 fieldset label:before {
-    display: inline-block;
-    content: '';
-    width: 32px;
-    height: 32px;
-    vertical-align: middle;
-    background-image: url('./images/radio_buttons.png');
-    background-repeat: no-repeat;
-    background-position: left;
-    margin-right: 8px;
+  display: inline-block;
+  content: "";
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+  background-image: url("./images/radio_buttons.png");
+  background-repeat: no-repeat;
+  background-position: left;
+  margin-right: 8px;
 }
 
 fieldset input[type="radio"] {
-    z-index: -1;
-    position: absolute;
-    transform: scale(.1);
+  z-index: -1;
+  position: absolute;
+  transform: scale(0.1);
 }
 
 fieldset input:checked + label:before {
-    background-position: right;
+  background-position: right;
 }
 
 fieldset input:focus + label:before {
-    filter: drop-shadow(0px 0px 1px #fff) drop-shadow(0px 0px 1px #fff) drop-shadow(0px 0px 1px #fff) drop-shadow(0px 0px 1px #fff);
+  filter: drop-shadow(0px 0px 1px #fff) drop-shadow(0px 0px 1px #fff)
+    drop-shadow(0px 0px 1px #fff) drop-shadow(0px 0px 1px #fff);
 }
 
 @media (max-width: 1000px) {
-    .heroPowerChoice {
-        transform: scale(.5);
-        margin-right: -170px;
-    }
+  .heroPowerChoice {
+    transform: scale(0.5);
+    margin-right: -170px;
+  }
 }
 
 @media (min-width: 650px) {
-	#guessSubtitle {
-		display: block;
-	}
-	
-    #rules {
-        padding: 32px 64px;
-    }
-	
-	#guessCard {
-        padding: 16px 32px;
-        font-size: 2rem;
-    }
-	
-	#flavorText {
-        padding: 16px;
-        margin: 32px auto 24px;
-    }
+  #guessSubtitle {
+    display: block;
+  }
 
-    .rulesTeaser {
-        padding: 64px;
-    }
-	
-	.button {
-        padding: 8px 16px;
-        font-size: 2rem;
-    }
-	
-	.score {
-        left: 16px;
-    }
-	
-	td.tableCardName {
-        background-size: contain;
-        width: 450px;
-        font-size: 2rem;
-        cursor: help;
-        line-height: 64px;
-        background-position: right center;
-    }
+  #rules {
+    padding: 32px 64px;
+  }
 
-    .tableCardName:hover img {
-        display: inline;
-    }
+  #guessCard {
+    padding: 16px 32px;
+    font-size: 2rem;
+  }
 
-    .nameContainer {
-        background-image: linear-gradient(90deg, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 70%);
-    }
+  #flavorText {
+    padding: 16px;
+    margin: 32px auto 24px;
+  }
 
-    .battlegrounds .nameContainer {
-        background-image: linear-gradient(90deg, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 70%);
-    }
+  .rulesTeaser {
+    padding: 64px;
+  }
 
-    
-    #changeCardImage img, #roundSuccessImage img {
-        width: auto;
-    }
-	
-	.modal {
-        transform: translateY(100vh);
-        animation: slideUp 1s;
-        animation-timing-function: ease-in-out;
-        animation-fill-mode: forwards;
-		padding: 64px;
-		max-width: 70%;
-		max-height: 80%;
-    }
-	
-	fieldset {
-        width: auto;
-		margin: 24px;
-    }
+  .button {
+    padding: 8px 16px;
+    font-size: 2rem;
+  }
+
+  .score {
+    left: 16px;
+  }
+
+  td.tableCardName {
+    background-size: contain;
+    width: 450px;
+    font-size: 2rem;
+    cursor: help;
+    line-height: 64px;
+    background-position: right center;
+  }
+
+  .tableCardName:hover img {
+    display: inline;
+  }
+
+  .nameContainer {
+    background-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 45%,
+      rgba(0, 0, 0, 0) 70%
+    );
+  }
+
+  .battlegrounds .nameContainer {
+    background-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 60%,
+      rgba(0, 0, 0, 0) 70%
+    );
+  }
+
+  #changeCardImage img,
+  #roundSuccessImage img {
+    width: auto;
+  }
+
+  .modal {
+    transform: translateY(100vh);
+    animation: slideUp 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    padding: 64px;
+    max-width: 70%;
+    max-height: 80%;
+  }
+
+  fieldset {
+    width: auto;
+    margin: 24px;
+  }
 }
 
 @media (min-width: 800px) {
-    #player {
-        transform: scale(1);
-        left: calc(50vw - 130px);
-        bottom: 32px;
-    }
-	
-	.wild #player::after {
-		content: '';
-		display: block;
-		width: 87px;
-		height: 53px;
-		position: absolute;
-		background-image: url(./images/wild1.png);
-		left: 1px;
-		bottom: -11px;
-	}
-	
-	.clue {
-        display: inline;
-    }
+  #player {
+    transform: scale(1);
+    left: calc(50vw - 130px);
+    bottom: 32px;
+  }
 
-    .clue + .clue:before {
-        content: '-';
-        margin-right: 8px;
-    }
+  .wild #player::after {
+    content: "";
+    display: block;
+    width: 87px;
+    height: 53px;
+    position: absolute;
+    background-image: url(./images/wild1.png);
+    left: 1px;
+    bottom: -11px;
+  }
+
+  .clue {
+    display: inline;
+  }
+
+  .clue + .clue:before {
+    content: "-";
+    margin-right: 8px;
+  }
 }
